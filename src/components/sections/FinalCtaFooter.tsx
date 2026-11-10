@@ -28,9 +28,10 @@ export function FinalCtaFooter() {
       <div className="relative min-h-[620px] overflow-hidden">
         <Image
           src={site.images.darkAmber.src}
-          alt=""
+          alt={site.images.darkAmber.alt}
           fill
           sizes="100vw"
+          quality={90}
           loading="eager"
           data-final-bg
           className="js-final-bg object-cover"

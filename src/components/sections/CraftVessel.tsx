@@ -18,6 +18,7 @@ export function CraftVessel() {
             alt={site.images.labelClose.alt || site.brand.product}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={90}
             priority
             data-craft-image
             className="js-craft-image object-cover"
@@ -33,6 +34,7 @@ export function CraftVessel() {
               alt={site.images.darkAmber.alt || site.brand.product}
               fill
               sizes="180px"
+              quality={75}
               loading="eager"
               className="object-cover"
             />

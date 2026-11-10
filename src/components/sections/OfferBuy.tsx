@@ -36,6 +36,8 @@ export function OfferBuy() {
               alt={site.images.bottleDark.alt}
               width={420}
               height={630}
+              sizes="(max-width: 1024px) 58vw, 340px"
+              quality={90}
               priority
               className="relative z-10 h-auto w-[58%] max-w-[340px] object-contain drop-shadow-[0_28px_36px_rgba(14,11,8,0.28)]"
             />
@@ -64,6 +66,7 @@ export function OfferBuy() {
                     alt={image.alt || site.offer.title}
                     fill
                     sizes="56px"
+                    quality={75}
                     loading="eager"
                     className="object-cover"
                   />

@@ -59,6 +59,8 @@ export function Hero() {
                 alt={site.images.bottleTilt.alt}
                 width={840}
                 height={1075}
+                sizes="(max-width: 1024px) 34vw, 380px"
+                quality={90}
                 priority
                 className="relative h-auto w-full object-contain drop-shadow-[0_30px_40px_rgba(14,11,8,0.25)]"
               />
