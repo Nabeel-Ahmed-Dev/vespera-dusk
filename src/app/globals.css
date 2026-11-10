@@ -1,26 +1,32 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-night: #0e0b08;
+  --color-night9: #16110c;
+  --color-amber7: #7a4a12;
+  --color-amber6: #a3651c;
+  --color-honey4: #e0ae5c;
+  --color-honey3: #edc98a;
+  --color-honey2: #f3ddb2;
+  --color-cream: #f6eedf;
+  --color-cream5: #fbf7ef;
+  --color-gold: #e7c07f;
+  --color-amber-mid: #a9681f;
+
+  --tracking-label: 0.22em;
+  --tracking-button: 0.12em;
+  --tracking-logo: 0.4em;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-cormorant), ui-serif, Georgia, "Times New Roman",
+    serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-logo: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream5);
+  color: var(--color-night);
+  font-family: var(--font-sans);
 }

@@ -1,69 +1,86 @@
-import Image from "next/image";
+import { site } from "@/content/site";
+
+/** Temporary style-guide preview for Step 2. Step 3 replaces this with the static desktop layout. */
+const swatches = [
+  { name: "night", className: "bg-night" },
+  { name: "night9", className: "bg-night9" },
+  { name: "amber7", className: "bg-amber7" },
+  { name: "amber6", className: "bg-amber6" },
+  { name: "honey4", className: "bg-honey4" },
+  { name: "honey3", className: "bg-honey3" },
+  { name: "honey2", className: "bg-honey2" },
+  { name: "cream", className: "bg-cream" },
+  { name: "cream5", className: "bg-cream5" },
+  { name: "gold", className: "bg-gold" },
+  { name: "amber-mid", className: "bg-amber-mid" },
+] as const;
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="mx-auto flex w-full max-w-3xl flex-col gap-12 px-6 py-16 text-night">
+      <header className="flex flex-col gap-3">
+        <p className="font-logo text-sm tracking-logo uppercase">
+          {site.nav.logo}
+        </p>
+        <h1 className="font-display text-4xl font-light tracking-tight">
+          Step 2 — tokens, fonts, content
+        </h1>
+        <p className="max-w-xl text-sm leading-relaxed text-night/70">
+          Temporary style-guide preview. Step 3 replaces this page with the
+          static desktop layout.
+        </p>
+      </header>
+
+      <section className="flex flex-col gap-4">
+        <p className="text-[10px] font-semibold tracking-label uppercase text-night/60">
+          Color tokens
+        </p>
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+          {swatches.map((swatch) => (
+            <li key={swatch.name} className="flex flex-col gap-2">
+              <div
+                className={`h-16 w-full rounded-sm border border-night/10 ${swatch.className}`}
+              />
+              <span className="text-xs font-medium">{swatch.name}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <p className="text-[10px] font-semibold tracking-label uppercase text-night/60">
+          Typography
+        </p>
+        <div className="flex flex-col gap-4">
+          <p className="font-display text-4xl font-light">
+            Cormorant Garamond — {site.hero.wordmark}
+          </p>
+          <p className="font-display text-3xl font-normal italic text-amber7">
+            {site.hero.tagline}
+          </p>
+          <p className="font-sans text-base font-medium leading-relaxed">
+            Manrope — {site.story.body}
+          </p>
+          <p className="font-logo text-sm tracking-logo uppercase">
+            Montserrat — {site.footer.logo}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <p className="text-[10px] font-semibold tracking-label uppercase text-night/60">
+          Label &amp; button samples
+        </p>
+        <p className="text-[10px] font-semibold tracking-label uppercase">
+          {site.story.label}
+        </p>
+        <button
+          type="button"
+          className="inline-flex h-14 w-fit items-center justify-center rounded-full bg-night px-8 text-[13px] font-semibold tracking-button text-cream5 uppercase"
+        >
+          {site.hero.cta}
+        </button>
+      </section>
+    </main>
   );
 }
