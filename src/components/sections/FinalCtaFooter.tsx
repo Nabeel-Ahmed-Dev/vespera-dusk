@@ -93,7 +93,7 @@ export function FinalCtaFooter() {
         </form>
       </div>
 
-      <div className="mx-auto w-full max-w-[1440px] px-10 pb-10 lg:px-16">
+      <div className="mx-auto w-full max-w-[1440px] px-10 lg:px-16">
         <div className="flex flex-wrap gap-12 text-sm text-cream/80">
           {site.footer.linkGroups.map((group, groupIndex) => (
             <ul key={groupIndex} className="flex flex-col gap-2.5">
@@ -107,14 +107,37 @@ export function FinalCtaFooter() {
             </ul>
           ))}
         </div>
+      </div>
 
-        <p
+      <div className="relative mt-16 w-full overflow-hidden">
+        <svg
           data-footer-wordmark
-          className="js-footer-wordmark mt-16 text-center font-logo text-[clamp(3rem,14vw,8rem)] leading-none tracking-[0.06em] text-honey3/15 uppercase"
+          className="js-footer-wordmark block w-full translate-y-[18%] text-honey3/15"
+          viewBox="0 0 100 16"
+          preserveAspectRatio="xMidYMax meet"
+          role="img"
+          aria-label={site.footer.logo}
         >
-          {site.footer.logo}
-        </p>
-        <Label className="mt-6 text-cream/40">{site.footer.copyright}</Label>
+          <text
+            x="0"
+            y="14.2"
+            textLength="100"
+            lengthAdjust="spacingAndGlyphs"
+            fill="currentColor"
+            style={{
+              fontFamily: "var(--font-logo)",
+              fontSize: "16px",
+              fontWeight: 600,
+              letterSpacing: "0",
+              textTransform: "uppercase",
+            }}
+          >
+            {site.footer.logo}
+          </text>
+        </svg>
+        <Label className="pointer-events-none absolute inset-x-0 bottom-5 z-10 px-10 text-cream/40 lg:px-16">
+          {site.footer.copyright}
+        </Label>
       </div>
     </SectionShell>
   );
