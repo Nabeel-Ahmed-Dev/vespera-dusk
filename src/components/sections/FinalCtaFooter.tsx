@@ -31,6 +31,7 @@ export function FinalCtaFooter() {
           alt=""
           fill
           sizes="100vw"
+          loading="eager"
           data-final-bg
           className="js-final-bg object-cover"
         />

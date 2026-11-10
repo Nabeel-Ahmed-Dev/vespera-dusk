@@ -8,12 +8,12 @@ export function Nav() {
       as="nav"
       dataSection="nav"
       aria-label={site.brand.name}
-      className="absolute inset-x-0 top-0 z-30"
+      className="absolute inset-x-0 top-0 z-30 bg-transparent"
     >
-      <div className="mx-auto flex h-[72px] w-full max-w-[1440px] items-center justify-between px-10 lg:px-16">
+      <div className="relative mx-auto grid h-[72px] w-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-10 lg:px-16">
         <a
           href="#hero"
-          className="font-logo text-[13px] tracking-logo text-night uppercase"
+          className="justify-self-start font-logo text-[13px] tracking-logo text-night uppercase"
         >
           {site.nav.logo}
         </a>
@@ -31,7 +31,7 @@ export function Nav() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center justify-self-end gap-5">
           <a
             href="#offer"
             className="hidden text-[13px] font-medium text-night/80 sm:inline"

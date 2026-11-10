@@ -14,8 +14,8 @@ export function Hero() {
       aria-label="Hero"
       className="min-h-screen overflow-hidden bg-[radial-gradient(ellipse_at_50%_40%,#F6DCA8_0%,#D9A355_58%,#A9681F_100%)] text-night"
     >
-      <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col px-10 pb-8 pt-[88px] lg:px-16">
-        <div className="flex items-start justify-between">
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col px-10 pb-8 pt-[72px] lg:px-16">
+        <div className="flex items-start justify-between pt-4">
           <Label className="text-night/60">{site.hero.metaLeft}</Label>
           <Label className="text-night/60">{site.hero.metaRight}</Label>
         </div>
@@ -25,10 +25,10 @@ export function Hero() {
         </Label>
 
         {/* Stage: DUSK + bottle share one composition frame */}
-        <div className="relative mx-auto mt-2 flex w-full flex-1 items-center justify-center">
-          <div className="relative aspect-[16/10.5] w-full max-w-[1180px]">
+        <div className="relative mx-auto mt-1 flex w-full flex-1 items-center justify-center">
+          <div className="relative aspect-[16/9] w-full max-w-[1320px]">
             <div
-              className="js-dusk-wordmark absolute inset-x-0 top-0 z-0 flex select-none items-start justify-center gap-[0.01em] font-display text-[clamp(6rem,19vw,16.5rem)] leading-[0.8] font-light tracking-[-0.03em]"
+              className="js-dusk-wordmark absolute inset-x-0 top-[2%] z-0 flex select-none items-start justify-center gap-[0.015em] font-display text-[clamp(9rem,31vw,29rem)] leading-[0.76] font-light tracking-[-0.045em]"
               aria-label={site.hero.wordmark}
             >
               {letters.map((letter, index) => (
@@ -42,13 +42,13 @@ export function Hero() {
               ))}
             </div>
 
-            <span className="pointer-events-none absolute top-[4%] right-[2%] z-10 font-display text-4xl italic text-night/70 lg:text-5xl">
+            <span className="pointer-events-none absolute top-[6%] right-[4%] z-10 font-display text-4xl italic text-night/70 lg:text-5xl">
               {site.hero.editionMark}
             </span>
 
             <div
               data-bottle="hero"
-              className="js-bottle absolute top-[4%] left-1/2 z-20 w-[min(36vw,400px)] -translate-x-1/2"
+              className="js-bottle absolute top-[8%] left-1/2 z-20 w-[min(34vw,380px)] -translate-x-1/2"
             >
               <div
                 aria-hidden

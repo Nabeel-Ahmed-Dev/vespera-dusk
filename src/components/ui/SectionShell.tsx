@@ -17,12 +17,16 @@ export function SectionShell({
   as: Tag = "section",
   "aria-label": ariaLabel,
 }: SectionShellProps) {
+  // Avoid `relative` + `absolute` on the same node — Tailwind source order
+  // can let `relative` win and break overlays (e.g. transparent nav on hero).
+  const isOutOfFlow = /\b(absolute|fixed|sticky)\b/.test(className);
+
   return (
     <Tag
       id={id}
       data-section={dataSection}
       aria-label={ariaLabel}
-      className={`relative w-full ${className}`}
+      className={`${isOutOfFlow ? "" : "relative "}w-full ${className}`.trim()}
     >
       {children}
     </Tag>

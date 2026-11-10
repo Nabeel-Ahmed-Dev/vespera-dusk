@@ -84,6 +84,7 @@ export function Story() {
                 alt={site.images.darkAmber.alt || site.images.bottleTilt.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                loading="eager"
                 className="object-cover"
               />
             </div>

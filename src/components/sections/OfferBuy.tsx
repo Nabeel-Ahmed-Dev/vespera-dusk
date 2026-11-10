@@ -29,14 +29,15 @@ export function OfferBuy() {
           />
           <div
             data-bottle="offer"
-            className="js-bottle absolute inset-0 flex items-center justify-center"
+            className="js-bottle absolute inset-x-0 top-0 bottom-28 flex items-center justify-center"
           >
             <Image
               src={site.images.bottleDark.src}
               alt={site.images.bottleDark.alt}
               width={420}
               height={630}
-              className="relative z-10 h-auto w-[55%] max-w-[320px] object-contain"
+              priority
+              className="relative z-10 h-auto w-[58%] max-w-[340px] object-contain drop-shadow-[0_28px_36px_rgba(14,11,8,0.28)]"
             />
             <div
               data-light-sweep
@@ -45,30 +46,31 @@ export function OfferBuy() {
             />
           </div>
 
-          <Label className="absolute top-6 left-6 rounded-full bg-night px-3.5 py-2 text-cream5">
+          <Label className="absolute top-6 left-6 z-10 rounded-full bg-night px-3.5 py-2 text-cream5">
             {site.offer.batchBadge}
           </Label>
-          <Label className="absolute bottom-6 left-6 text-night/70">
-            {site.offer.figCaption}
-          </Label>
 
-          <div className="absolute bottom-16 left-6 hidden gap-2 sm:flex">
-            {gallery.map((image, index) => (
-              <div
-                key={image.src}
-                className={`relative h-14 w-14 overflow-hidden border ${
-                  index === 0 ? "border-night" : "border-night/20"
-                }`}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt || site.offer.title}
-                  fill
-                  sizes="56px"
-                  className="object-cover"
-                />
-              </div>
-            ))}
+          <div className="absolute bottom-6 left-6 z-10 flex flex-col gap-3">
+            <div className="hidden gap-2 sm:flex">
+              {gallery.map((image, index) => (
+                <div
+                  key={image.src}
+                  className={`relative h-14 w-14 overflow-hidden bg-night/10 border ${
+                    index === 0 ? "border-night" : "border-night/20"
+                  }`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt || site.offer.title}
+                    fill
+                    sizes="56px"
+                    loading="eager"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            <Label className="text-night/70">{site.offer.figCaption}</Label>
           </div>
         </div>
 
