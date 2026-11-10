@@ -1,0 +1,14 @@
+---
+description: Next.js App Router conventions for Vespera Dusk
+globs: "**/*.{tsx,ts,jsx,js}"
+alwaysApply: false
+---
+
+# Next.js (App Router)
+
+- This is **not** legacy Next — read `AGENTS.md` and `node_modules/next/dist/docs/` before using unfamiliar APIs.
+- Default to **Server Components**. Add `'use client'` only for motion, pointer, or browser APIs (client islands).
+- Use `next/font` for Cormorant Garamond, Manrope, Montserrat (Step 2+).
+- Use `next/image` for bottle/atmosphere assets; set **`priority`** on the hero bottle.
+- Keep routes under `src/app/`. Shared UI under `src/components/`; content in `src/content/`; GSAP bootstrap in `src/lib/gsap.ts`.
+- Do not add Pages Router patterns or deprecated Image/Font APIs.

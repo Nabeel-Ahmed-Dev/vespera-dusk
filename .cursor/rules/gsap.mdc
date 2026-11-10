@@ -1,0 +1,16 @@
+---
+description: GSAP + Lenis motion rules for Vespera Dusk
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# GSAP / Lenis
+
+- Client components only for motion: start with `'use client'`.
+- Register plugins **once** in `src/lib/gsap.ts`; import that module from motion islands — do not re-register ad hoc.
+- Use `useGSAP` with a scope ref; use `contextSafe` for event handlers that tween.
+- Use `gsap.matchMedia` for desktop / mobile / `prefers-reduced-motion`.
+- Drive Lenis from `gsap.ticker`. **Do not** use ScrollSmoother.
+- Animate only `transform`, `opacity`, and `clip-path` (no layout-property tweens).
+- Clean up: kill tweens/ScrollTriggers / revert contexts on unmount (`useGSAP` handles context when scoped correctly).
+- Spec contract: `docs/motion-spec.md`. Feel: `expo.out` reveals, `power2.inOut` scrubs, elastic only on magnetic buttons, `scrub: 1`.

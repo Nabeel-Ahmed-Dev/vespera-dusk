@@ -1,0 +1,13 @@
+---
+description: Tailwind CSS v4 CSS-first conventions
+globs: "**/*.{css,tsx,ts}"
+alwaysApply: false
+---
+
+# Tailwind v4
+
+- CSS-first: define design tokens with `@theme` in `globals.css` (or equivalent global CSS).
+- **No** `tailwind.config.js` / `tailwind.config.ts`.
+- **No** `@tailwind base|components|utilities` directives — use the v4 import/`@theme` setup already in the project.
+- Prefer tokenized colors/type from `docs/design.md` over one-off hex in components when tokens exist.
+- Do not introduce a second styling system alongside Tailwind + CSS variables.
