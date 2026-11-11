@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 /** Runs before paint: stamp skip so the overlay never flashes on repeat / reduce. */
-const preloaderBootScript = `(function(){try{var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;var s=false;try{s=sessionStorage.getItem("vd-preloaded")==="1"}catch(e){}if(r||s)document.documentElement.setAttribute("data-vd-preloaded","1")}catch(e){}})();`;
+const preloaderBootScript = `(function(){try{var d=document.documentElement;d.classList.add("js");var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;var s=false;try{s=sessionStorage.getItem("vd-preloaded")==="1"}catch(e){}if(r||s)d.setAttribute("data-vd-preloaded","1")}catch(e){}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

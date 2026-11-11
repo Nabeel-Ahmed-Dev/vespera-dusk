@@ -1,12 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 
 export function StickyBuyBar() {
+  // Hidden while the hero (which has its own Add to bag button) is on screen.
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById("hero");
+    if (!hero) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0),
+      { threshold: 0 },
+    );
+    io.observe(hero);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <div
       data-section="sticky-buy"
-      className="fixed inset-x-0 bottom-0 z-40 px-4 pb-4 pt-2 lg:hidden"
+      data-visible={visible ? "true" : "false"}
+      aria-hidden={!visible}
+      inert={!visible}
+      className={`fixed inset-x-0 bottom-0 z-40 px-4 pb-4 pt-2 transition-[translate,opacity] duration-500 ease-out motion-reduce:transition-none lg:hidden ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[130%] opacity-0"}`}
       style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
     >
       <div
