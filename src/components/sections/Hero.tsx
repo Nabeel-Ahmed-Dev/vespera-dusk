@@ -188,7 +188,7 @@ export function Hero() {
                   x: boxW + bandW * 0.15,
                   rotation: 18,
                   keyframes: { opacity: [0, 1, 1, 0], easeEach: "none" },
-                  duration: 1.4,
+                  duration: 2.2,
                   ease: "sine.inOut",
                   onComplete: () => {
                     sweeping = false;
