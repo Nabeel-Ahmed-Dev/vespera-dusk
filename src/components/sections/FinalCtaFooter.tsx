@@ -100,9 +100,9 @@ export function FinalCtaFooter() {
 
       <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12 lg:pt-[72px]">
         <div className="flex gap-12 text-sm text-cream/80 lg:hidden">
-          {site.footer.linkGroups.slice(0, 2).map((group) => (
-            <ul key={group.heading} className="flex flex-col gap-2.5">
-              {group.links.map((link) => (
+          {site.footer.mobileLinkColumns.map((column, columnIndex) => (
+            <ul key={columnIndex} className="flex flex-col gap-2.5">
+              {column.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}

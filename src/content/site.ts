@@ -185,6 +185,7 @@ export type SiteContent = {
     subscribe: string;
     brandTagline: string;
     linkGroups: FooterLinkGroup[];
+    mobileLinkColumns: { label: string; href: string }[][];
     logo: string;
     copyright: string;
     legalLinks: { label: string; href: string }[];
@@ -492,6 +493,18 @@ export const site: SiteContent = {
           { label: "Contact", href: "#" },
         ],
       },
+    ],
+    mobileLinkColumns: [
+      [
+        { label: "Dusk #01", href: "#offer" },
+        { label: "Discovery vial", href: "#offer" },
+        { label: "Refills", href: "#vessel" },
+      ],
+      [
+        { label: "Our story", href: "#story" },
+        { label: "Shipping", href: "#faq" },
+        { label: "Contact", href: "#footer" },
+      ],
     ],
     logo: "VESPERA",
     copyright: "© 2026 VESPERA PARFUMS — CONCEPT DESIGN",
