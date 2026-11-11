@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
 import { site } from "@/content/site";
@@ -10,8 +10,8 @@ import {
   PRELOADED_DATA_ATTR,
 } from "@/lib/preloader";
 
-/** Total ritual length â€” curtain wipe then leave (~1.6â€“1.8s). */
-const PRELOADER_DURATION = 1.7;
+/** Total ritual length — curtain wipe then leave (~2.6s). */
+const PRELOADER_DURATION = 2.6;
 /** 18:47 as total minutes from 00:00. */
 const TARGET_MINUTES = 18 * 60 + 47;
 
@@ -32,12 +32,12 @@ function shouldSkipPreloader(): boolean {
 }
 
 /**
- * Full-screen load ritual: clock 00:00â†’18:47, DUSK mask rise, gold curtain.
+ * Full-screen load ritual: clock 00:00→18:47, DUSK mask rise, gold curtain.
  * Skipped on repeat visits (sessionStorage) and when prefers-reduced-motion.
  * Overlay is aria-hidden; page content stays available to assistive tech.
  * Visibility for skip is decided before paint via layout boot script + CSS.
  *
- * Transforms are GSAP-owned only â€” no Tailwind translate utilities (v4 `translate`
+ * Transforms are GSAP-owned only — no Tailwind translate utilities (v4 `translate`
  * property would fight GSAP's `transform` and leave letters/curtain off-screen).
  */
 export function Preloader() {
@@ -107,7 +107,7 @@ export function Preloader() {
         curtain,
         {
           yPercent: 0,
-          duration: 0.55,
+          duration: 1.0, ease: "power3.inOut",
         },
         0.95,
       );
@@ -116,9 +116,9 @@ export function Preloader() {
         root,
         {
           yPercent: -100,
-          duration: 0.45,
+          duration: 0.75, ease: "power3.inOut",
         },
-        1.35,
+        1.85,
       );
 
       tl.duration(PRELOADER_DURATION);
