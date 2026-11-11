@@ -420,7 +420,7 @@ export function Hero() {
           <div className="relative aspect-[342/470] w-full max-w-[1320px] lg:aspect-auto lg:h-full lg:min-h-0">
             <div
               ref={wordmarkRef}
-              className="js-hero-enter js-dusk-wordmark absolute inset-x-0 top-0 z-0 flex select-none items-start justify-center overflow-hidden font-display text-[clamp(5.5rem,33.8vw,8.25rem)] leading-[0.85] font-light tracking-[-0.02em] lg:top-[2%] lg:text-[clamp(9rem,min(31vw,42dvh),29rem)] lg:leading-[0.76] lg:tracking-[-0.045em]"
+              className="js-hero-enter js-dusk-wordmark absolute inset-x-0 top-0 z-0 flex select-none items-start justify-center overflow-hidden font-display text-[clamp(5.5rem,33.8vw,8.25rem)] leading-[0.85] font-light tracking-[-0.02em] lg:top-[2%] lg:text-[clamp(9rem,min(31vw,64dvh),29rem)] lg:leading-[0.76] lg:tracking-[-0.045em]"
               aria-label={site.hero.wordmark}
             >
               {site.hero.wordmark}
