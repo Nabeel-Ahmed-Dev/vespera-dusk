@@ -66,8 +66,10 @@ export function SunsetBackground() {
           scrollTrigger: {
             trigger: "#hero",
             endTrigger: "#notes",
+            // Night by the time Notes' top reaches the viewport bottom —
+            // avoids amber Story sitting above solid night Notes.
             start: "top top",
-            end: "top top",
+            end: "top bottom",
             scrub: SCRUB,
             invalidateOnRefresh: true,
             onUpdate: (self) => apply(self.progress),
