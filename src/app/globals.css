@@ -25,8 +25,19 @@
   --font-logo: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }
 
+:root {
+  --sunset-bg: #e7c07f;
+  --sunset-fg: #0e0b08;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+/* Lenis owns scrolling when active — avoid fighting CSS smooth scroll. */
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto;
 }
 
 body {
@@ -34,6 +45,44 @@ body {
   color: var(--color-cream);
   font-family: var(--font-sans);
   overflow-x: hidden;
+}
+
+/*
+ * Live sunset scrub (Step 5): fixed layer + body use --sunset-bg.
+ * Hero/Story/Notes yield (or feather) so one continuous sky shows through.
+ * Reduced-motion leaves data-sunset unset — static section backgrounds stay.
+ * Proof / Offer / Final CTA keep their own section backgrounds.
+ */
+html[data-sunset="live"] body {
+  background: var(--sunset-bg);
+}
+
+/* Radial glow at scroll 0, feathered into the fixed sunset at the bottom. */
+html[data-sunset="live"] [data-section="hero"] {
+  background-color: transparent;
+  background-image: radial-gradient(
+    ellipse 120% 95% at 50% 38%,
+    #f6dca8 0%,
+    #d9a355 42%,
+    #a9681f 68%,
+    transparent 100%
+  );
+}
+
+html[data-sunset="live"] [data-section="story"] {
+  background-image: none;
+  background-color: transparent;
+}
+
+/* Short top fade into night; body of Notes stays night once scrub completes. */
+html[data-sunset="live"] [data-section="scent-pyramid"] {
+  background-color: transparent;
+  background-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #0e0b08 5rem,
+    #0e0b08 100%
+  );
 }
 
 ::selection {
