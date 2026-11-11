@@ -420,10 +420,10 @@ export function Hero() {
 
         {/* Stage: fills leftover viewport height on lg (no fixed aspect). */}
         <div className="relative mx-auto mt-2.5 flex w-full min-h-0 flex-1 items-center justify-center lg:mt-1">
-          <div className="relative aspect-[342/470] w-full max-w-[1320px] lg:aspect-auto lg:h-full lg:min-h-0">
+          <div className="relative aspect-[342/470] w-full max-w-[min(100%,max(240px,calc((100svh-350px)*0.728)))] sm:max-w-[min(100%,max(300px,calc((100svh-460px)*0.728)))] lg:max-w-[1320px] lg:aspect-auto lg:h-full lg:min-h-0">
             <div
               ref={wordmarkRef}
-              className="js-hero-enter js-dusk-wordmark absolute inset-x-0 top-0 z-0 flex select-none items-start justify-center overflow-hidden font-display text-[clamp(5.5rem,33.8vw,8.25rem)] leading-[0.85] font-light tracking-[-0.02em] lg:top-[2%] lg:text-[clamp(9rem,min(31vw,64dvh),29rem)] lg:leading-[0.76] lg:tracking-[-0.045em]"
+              className="js-hero-enter js-dusk-wordmark absolute inset-x-[-40vw] top-0 lg:inset-x-0 z-0 flex select-none items-start justify-center overflow-hidden font-display text-[clamp(5.5rem,33.8vw,8.25rem)] leading-[0.85] font-light tracking-[-0.02em] lg:top-[2%] lg:text-[clamp(9rem,min(31vw,64dvh),29rem)] lg:leading-[0.76] lg:tracking-[-0.045em]"
               aria-label={site.hero.wordmark}
             >
               {site.hero.wordmark}
@@ -431,7 +431,7 @@ export function Hero() {
 
             <span
               ref={editionRef}
-              className="js-hero-enter pointer-events-none absolute top-[1%] right-0 z-10 font-display text-[1.25rem] italic text-night/70 sm:text-2xl lg:top-[6%] lg:right-[4%] lg:text-4xl xl:text-5xl"
+              className="js-hero-enter pointer-events-none absolute top-[-5%] right-[calc(50%-min(41.2vw,161px))] z-10 font-display text-[1.25rem] italic text-night/70 sm:top-0 sm:right-[calc(50%-198px)] sm:text-2xl lg:top-[6%] lg:right-[4%] lg:text-4xl xl:text-5xl"
             >
               {site.hero.editionMark}
             </span>
