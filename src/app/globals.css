@@ -48,6 +48,14 @@ body {
 }
 
 /*
+ * Preloader skip (repeat visit / reduced-motion): inline boot script stamps
+ * data-vd-preloaded on <html> before first paint so the overlay never flashes.
+ */
+html[data-vd-preloaded] [data-vd-preloader] {
+  display: none !important;
+}
+
+/*
  * Live sunset scrub (Step 5): fixed layer + body use --sunset-bg.
  * Hero/Story/Notes yield (or feather) so one continuous sky shows through.
  * Reduced-motion leaves data-sunset unset — static section backgrounds stay.

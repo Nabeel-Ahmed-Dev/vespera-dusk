@@ -1,0 +1,171 @@
+"use client";
+
+import { useRef } from "react";
+import { site } from "@/content/site";
+import { EASE_REVEAL, gsap, mmConditions, useGSAP } from "@/lib/gsap";
+import { lockScroll, unlockScroll } from "@/lib/lenis-control";
+import {
+  hasPreloadedSession,
+  markPreloaded,
+  PRELOADED_DATA_ATTR,
+} from "@/lib/preloader";
+
+const PRELOADER_DURATION = 1.6;
+/** 18:47 as total minutes from 00:00. */
+const TARGET_MINUTES = 18 * 60 + 47;
+
+function formatClock(totalMinutes: number): string {
+  const clamped = Math.max(0, Math.min(TARGET_MINUTES, Math.round(totalMinutes)));
+  const hours = Math.floor(clamped / 60);
+  const minutes = clamped % 60;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+}
+
+function shouldSkipPreloader(): boolean {
+  if (typeof window === "undefined") return false;
+  if (document.documentElement.getAttribute(PRELOADED_DATA_ATTR) === "1") {
+    return true;
+  }
+  if (window.matchMedia(mmConditions.reduce).matches) return true;
+  return hasPreloadedSession();
+}
+
+/**
+ * Full-screen load ritual: clock 00:00→18:47, DUSK mask rise, gold curtain.
+ * Skipped on repeat visits (sessionStorage) and when prefers-reduced-motion.
+ * Overlay is aria-hidden; page content stays available to assistive tech.
+ * Visibility for skip is decided before paint via layout boot script + CSS.
+ */
+export function Preloader() {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const clockRef = useRef<HTMLSpanElement>(null);
+  const lettersRef = useRef<HTMLSpanElement[]>([]);
+  const curtainRef = useRef<HTMLDivElement>(null);
+
+  const wordmark = site.hero.wordmark;
+  const letters = wordmark.split("");
+
+  useGSAP(
+    () => {
+      if (shouldSkipPreloader()) {
+        markPreloaded();
+        return;
+      }
+
+      const root = rootRef.current;
+      const clockEl = clockRef.current;
+      const curtain = curtainRef.current;
+      const letterEls = lettersRef.current.filter(Boolean);
+      if (!root || !clockEl || !curtain || letterEls.length === 0) return;
+
+      lockScroll();
+
+      const clock = { minutes: 0 };
+      clockEl.textContent = formatClock(0);
+
+      gsap.set(letterEls, { yPercent: 100 });
+      gsap.set(curtain, { yPercent: 100 });
+
+      const tl = gsap.timeline({
+        defaults: { ease: EASE_REVEAL },
+        onComplete: () => {
+          markPreloaded();
+          unlockScroll();
+        },
+      });
+
+      // Clock + DUSK rise share the first beat; curtain then wipe + exit (~1.6s).
+      tl.to(
+        clock,
+        {
+          minutes: TARGET_MINUTES,
+          duration: 1.05,
+          onUpdate: () => {
+            clockEl.textContent = formatClock(clock.minutes);
+          },
+        },
+        0,
+      );
+
+      tl.to(
+        letterEls,
+        {
+          yPercent: 0,
+          duration: 1.05,
+          stagger: 0.07,
+        },
+        0,
+      );
+
+      tl.to(
+        curtain,
+        {
+          yPercent: 0,
+          duration: 0.55,
+        },
+        0.85,
+      );
+
+      tl.to(
+        root,
+        {
+          yPercent: -100,
+          duration: 0.55,
+        },
+        1.05,
+      );
+
+      // Keep total timeline length at the motion-spec 1.6s.
+      tl.duration(PRELOADER_DURATION);
+
+      return () => {
+        unlockScroll();
+      };
+    },
+    { scope: rootRef },
+  );
+
+  return (
+    <div
+      ref={rootRef}
+      data-vd-preloader=""
+      aria-hidden="true"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-night text-cream"
+    >
+      <div className="relative z-10 flex flex-col items-center gap-8">
+        <span
+          ref={clockRef}
+          className="text-[10px] font-semibold tracking-label text-cream/70 uppercase tabular-nums"
+        >
+          00:00
+        </span>
+
+        <p
+          className="flex select-none items-center justify-center gap-[0.04em] font-display text-[clamp(4.5rem,18vw,9rem)] leading-none font-light tracking-[-0.03em] text-cream"
+          aria-hidden="true"
+        >
+          {letters.map((letter, index) => (
+            <span key={`${letter}-${index}`} className="inline-block overflow-hidden">
+              <span
+                ref={(el) => {
+                  if (el) lettersRef.current[index] = el;
+                }}
+                className="inline-block translate-y-full will-change-transform"
+              >
+                {letter}
+              </span>
+            </span>
+          ))}
+        </p>
+      </div>
+
+      <div
+        ref={curtainRef}
+        className="pointer-events-none absolute inset-0 z-20 translate-y-full will-change-transform"
+        style={{
+          background: "linear-gradient(180deg, #E7C07F 0%, #A9681F 100%)",
+        }}
+      />
+    </div>
+  );
+}
