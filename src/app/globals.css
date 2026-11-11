@@ -29,6 +29,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Lenis owns scrolling when active — avoid fighting CSS smooth scroll. */
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto;
+}
+
 body {
   background: var(--color-night);
   color: var(--color-cream);
