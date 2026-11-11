@@ -113,10 +113,13 @@ export function FinalCtaFooter() {
         </div>
       </div>
 
-      <div className="relative mt-10 w-full overflow-hidden sm:mt-14 lg:mt-16">
+      <div className="relative mt-10 w-full sm:mt-14 lg:mt-16 lg:overflow-hidden">
+        <Label className="px-6 text-cream/40 sm:px-8 lg:hidden">
+          {site.footer.copyright}
+        </Label>
         <svg
           data-footer-wordmark
-          className="js-footer-wordmark block h-auto w-full max-w-none translate-y-[12%] text-honey3/15 sm:translate-y-[18%]"
+          className="js-footer-wordmark mt-6 block h-auto w-full max-w-none px-6 text-honey3/15 sm:mt-8 sm:px-8 lg:mt-0 lg:translate-y-[18%] lg:px-0"
           viewBox="0 0 100 16"
           preserveAspectRatio="xMidYMax meet"
           role="img"
@@ -139,7 +142,7 @@ export function FinalCtaFooter() {
             {site.footer.logo}
           </text>
         </svg>
-        <Label className="pointer-events-none absolute inset-x-0 bottom-4 z-10 px-6 text-cream/40 sm:bottom-5 sm:px-8 lg:px-16">
+        <Label className="pointer-events-none absolute inset-x-0 bottom-4 z-10 hidden px-6 text-cream/40 sm:bottom-5 sm:px-8 lg:block lg:px-16">
           {site.footer.copyright}
         </Label>
       </div>
