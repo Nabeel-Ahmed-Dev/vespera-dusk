@@ -13,7 +13,7 @@ export function Nav() {
       <div className="relative mx-auto flex h-[72px] w-full max-w-[1440px] items-center justify-between px-6 sm:px-8 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-16">
         <a
           href="#hero"
-          className="justify-self-start font-logo text-[13px] tracking-logo text-night uppercase"
+          className="inline-flex min-h-11 items-center justify-self-start font-logo text-[13px] tracking-logo text-night uppercase"
         >
           {site.nav.logo}
         </a>
@@ -34,23 +34,21 @@ export function Nav() {
         <div className="flex items-center justify-self-end gap-4 lg:gap-5">
           <a
             href="#offer"
-            className="text-[13px] font-medium text-night/80"
+            className="inline-flex min-h-11 items-center text-[13px] font-medium text-night/80"
           >
             {site.nav.bag}
           </a>
-          <Button
-            href="#offer"
-            magnetic
-            className="hidden h-11 px-5 text-[11px] lg:inline-flex"
-          >
-            <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-honey3" />
-            {site.nav.shopCta}
-          </Button>
+          <div className="hidden lg:block">
+            <Button href="#offer" magnetic className="h-11 px-5 text-[11px]">
+              <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-honey3" />
+              {site.nav.shopCta}
+            </Button>
+          </div>
           <button
             type="button"
             aria-label="Open menu"
             aria-expanded="false"
-            className="flex h-11 w-11 items-center justify-center text-night lg:hidden"
+            className="flex h-11 w-11 shrink-0 items-center justify-center text-night lg:hidden"
           >
             <svg
               width="22"

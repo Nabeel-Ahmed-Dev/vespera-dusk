@@ -111,7 +111,7 @@ export function Hero() {
             </Label>
             <a
               href="#story"
-              className="order-3 hidden text-[13px] font-medium text-night/75 underline decoration-night/30 underline-offset-4 sm:inline"
+              className="order-3 hidden min-h-11 items-center text-[13px] font-medium text-night/75 underline decoration-night/30 underline-offset-4 sm:inline-flex"
             >
               {site.hero.discover}
             </a>

@@ -102,7 +102,7 @@ export function FinalCtaFooter() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="inline-flex min-h-11 items-center hover:text-cream"
+                    className="inline-flex min-h-11 min-w-11 items-center hover:text-cream"
                   >
                     {link.label}
                   </a>
