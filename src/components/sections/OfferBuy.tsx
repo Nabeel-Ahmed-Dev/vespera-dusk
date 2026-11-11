@@ -22,7 +22,7 @@ export function OfferBuy() {
       className="overflow-hidden bg-cream text-night"
     >
       <div className="mx-auto grid w-full max-w-[1440px] lg:grid-cols-2">
-        <div className="relative min-h-[480px] bg-[linear-gradient(180deg,#E8C27E,#B67828)] lg:min-h-[840px]">
+        <div className="relative min-h-[440px] bg-[linear-gradient(180deg,#E8C27E,#B67828)] sm:min-h-[480px] lg:min-h-[840px]">
           <div
             aria-hidden
             className="absolute top-[18%] left-1/2 h-[280px] w-[280px] -translate-x-1/2 rounded-full bg-[#FFE9BF] opacity-80 blur-[50px]"
@@ -36,10 +36,10 @@ export function OfferBuy() {
               alt={site.images.bottleDark.alt}
               width={420}
               height={630}
-              sizes="(max-width: 1024px) 58vw, 340px"
+              sizes="(max-width: 1023px) 52vw, 340px"
               quality={90}
               priority
-              className="relative z-10 h-auto w-[58%] max-w-[340px] object-contain drop-shadow-[0_28px_36px_rgba(14,11,8,0.28)]"
+              className="relative z-10 h-auto w-[52%] max-w-[200px] object-contain drop-shadow-[0_28px_36px_rgba(14,11,8,0.28)] sm:w-[58%] sm:max-w-[340px] lg:max-w-[340px]"
             />
             <div
               data-light-sweep
@@ -53,7 +53,7 @@ export function OfferBuy() {
           </Label>
 
           <div className="absolute bottom-6 left-6 z-10 flex flex-col gap-3">
-            <div className="hidden gap-2 sm:flex">
+            <div className="hidden gap-2 lg:flex">
               {gallery.map((image, index) => (
                 <div
                   key={image.src}
@@ -73,14 +73,16 @@ export function OfferBuy() {
                 </div>
               ))}
             </div>
-            <Label className="text-night/70">{site.offer.figCaption}</Label>
+            <Label className="hidden text-night/70 lg:block">
+              {site.offer.figCaption}
+            </Label>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-cream px-10 py-16 lg:px-16 lg:py-20">
+        <div className="flex flex-col justify-center bg-cream px-6 py-10 sm:px-8 sm:py-16 lg:px-16 lg:py-20">
           <Label className="text-night/55">{site.offer.label}</Label>
 
-          <h2 className="mt-5 font-display text-[clamp(3rem,5vw,4.5rem)] leading-[0.92] font-light">
+          <h2 className="mt-5 font-display text-[clamp(2.75rem,14vw,3.75rem)] leading-[0.9] font-light lg:text-[clamp(3rem,5vw,4.5rem)] lg:leading-[0.92]">
             {site.offer.title}
           </h2>
           <p className="mt-3 text-[13px] text-night/70">{site.offer.subtitle}</p>
@@ -88,11 +90,11 @@ export function OfferBuy() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <span
               data-price
-              className="js-price font-display text-5xl font-normal leading-none"
+              className="js-price font-display text-[2.75rem] font-normal leading-none sm:text-5xl"
             >
               ${site.offer.price}
             </span>
-            <s className="font-display text-2xl text-night/40">
+            <s className="font-display text-[1.375rem] text-night/40 sm:text-2xl">
               {site.offer.compareAtLabel}
             </s>
             <Label className="rounded-full bg-honey3 px-2.5 py-1.5 text-night">
@@ -100,30 +102,32 @@ export function OfferBuy() {
             </Label>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <Label className="text-night/55">{site.offer.sizeLabel}</Label>
-            <div className="mt-3 flex gap-3">
+            <div className="mt-3 flex gap-2.5 sm:gap-3">
               {site.offer.sizes.map((size) => (
                 <button
                   key={size.id}
                   type="button"
                   data-size-option={size.id}
-                  className={`js-size-option flex flex-1 flex-col gap-1 rounded-[4px] border p-3.5 text-left ${
+                  className={`js-size-option flex min-w-0 flex-1 flex-col gap-1 rounded-[4px] border p-3 text-left sm:p-3.5 ${
                     size.selected
                       ? "border-night border-[1.5px] bg-cream5"
                       : "border-night/18"
                   }`}
                 >
                   {size.badge ? (
-                    <span className="mb-1 w-fit rounded-full bg-night px-2 py-0.5 text-[9px] font-semibold tracking-label text-cream5 uppercase">
+                    <span className="mb-1 w-fit max-w-full truncate rounded-full bg-night px-2 py-0.5 text-[9px] font-semibold tracking-label text-cream5 uppercase">
                       {size.badge}
                     </span>
                   ) : null}
-                  <span className="font-display text-2xl font-normal">
+                  <span className="font-display text-[1.375rem] font-normal sm:text-2xl">
                     {size.volume}
                   </span>
                   <span className="text-sm font-bold">{size.priceLabel}</span>
-                  <span className="text-[11px] text-night/55">{size.perMl}</span>
+                  <span className="text-[11px] leading-snug text-night/55">
+                    {size.perMl}
+                  </span>
                 </button>
               ))}
             </div>
