@@ -411,9 +411,12 @@ export function Hero() {
           {site.hero.eyebrow}
         </p>
 
-        <Label className="js-hero-enter js-hero-vertical pointer-events-none absolute top-[42%] left-6 origin-left -translate-y-1/2 -rotate-90 text-night/50 hidden lg:left-8 lg:block">
-          {site.hero.metaVertical}
-        </Label>
+        {/* Layout shell: centered on the 100dvh hero, rotated with Tailwind. GSAP only fades the inner label. */}
+        <div className="pointer-events-none absolute top-1/2 left-8 hidden -translate-x-1/2 -translate-y-1/2 -rotate-90 lg:block">
+          <Label className="js-hero-enter js-hero-vertical block whitespace-nowrap text-night/50">
+            {site.hero.metaVertical}
+          </Label>
+        </div>
 
         {/* Stage: fills leftover viewport height on lg (no fixed aspect). */}
         <div className="relative mx-auto mt-2.5 flex w-full min-h-0 flex-1 items-center justify-center lg:mt-1">
