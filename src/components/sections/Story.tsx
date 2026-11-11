@@ -88,7 +88,7 @@ export function Story() {
               ease: "power1.out",
               scrollTrigger: {
                 trigger: headline,
-                start: "top 80%",
+                start: "top 60%",
                 once: true,
               },
             });
@@ -99,7 +99,7 @@ export function Story() {
               ease: "power1.out",
               scrollTrigger: {
                 trigger: body,
-                start: "top 85%",
+                start: "top 65%",
                 once: true,
               },
             });
@@ -110,7 +110,7 @@ export function Story() {
               ease: "power1.out",
               scrollTrigger: {
                 trigger: imageClip,
-                start: "top 80%",
+                start: "top 60%",
                 once: true,
               },
             });
@@ -121,7 +121,7 @@ export function Story() {
               ease: "power1.out",
               scrollTrigger: {
                 trigger: statsRow,
-                start: "top 85%",
+                start: "top 65%",
                 once: true,
               },
             });
@@ -151,7 +151,7 @@ export function Story() {
 
           ScrollTrigger.create({
             trigger: headline,
-            start: "top 80%",
+            start: "top 60%",
             once: true,
             onEnter: () => {
               headlineTween.play();
@@ -172,7 +172,7 @@ export function Story() {
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: body,
-                  start: "top 85%",
+                  start: "top 65%",
                   once: true,
                 },
               });
@@ -208,7 +208,7 @@ export function Story() {
               .timeline({
                 scrollTrigger: {
                   trigger: imageClip,
-                  start: "top 80%",
+                  start: "top 60%",
                   once: true,
                 },
               })
@@ -311,7 +311,7 @@ export function Story() {
 
           ScrollTrigger.create({
             trigger: statsRow,
-            start: "top 85%",
+            start: "top 65%",
             once: true,
             onEnter: () => {
               statsFade.play();
