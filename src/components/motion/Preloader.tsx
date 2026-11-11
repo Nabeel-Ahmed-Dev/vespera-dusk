@@ -10,8 +10,8 @@ import {
   PRELOADED_DATA_ATTR,
 } from "@/lib/preloader";
 
-/** Total ritual length — curtain wipe then leave (~2.6s). */
-const PRELOADER_DURATION = 2.6;
+/** Total ritual length — curtain wipe then leave (~2.4s). */
+const PRELOADER_DURATION = 2.4;
 /** 18:47 as total minutes from 00:00. */
 const TARGET_MINUTES = 18 * 60 + 47;
 
