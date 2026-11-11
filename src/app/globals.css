@@ -25,6 +25,11 @@
   --font-logo: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }
 
+:root {
+  --sunset-bg: #e7c07f;
+  --sunset-fg: #0e0b08;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -40,6 +45,20 @@ body {
   color: var(--color-cream);
   font-family: var(--font-sans);
   overflow-x: hidden;
+}
+
+/*
+ * Live sunset scrub (Step 5): fixed layer + body use --sunset-bg.
+ * Hero keeps its radial at scroll 0; Story yields so the scrub shows through.
+ * Proof / Offer / Final CTA keep their own section backgrounds.
+ */
+html[data-sunset="live"] body {
+  background: var(--sunset-bg);
+}
+
+html[data-sunset="live"] [data-section="story"] {
+  background-image: none;
+  background-color: transparent;
 }
 
 ::selection {
