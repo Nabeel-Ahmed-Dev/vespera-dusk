@@ -27,7 +27,7 @@ export function CraftVessel() {
 
           <div
             data-craft-inset
-            className="js-craft-inset absolute right-6 bottom-6 z-10 hidden h-[200px] w-[150px] overflow-hidden border border-cream/20 shadow-[0_20px_40px_rgba(0,0,0,0.35)] sm:block lg:right-10 lg:bottom-10 lg:h-[240px] lg:w-[180px]"
+            className="js-craft-inset absolute right-6 bottom-6 z-10 hidden h-[200px] w-[150px] overflow-hidden border border-cream/20 shadow-[0_20px_40px_rgba(0,0,0,0.35)] lg:right-10 lg:bottom-10 lg:block lg:h-[240px] lg:w-[180px]"
           >
             <Image
               src={site.images.darkAmber.src}
@@ -41,9 +41,9 @@ export function CraftVessel() {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center px-10 py-20 lg:px-16 lg:py-28">
+        <div className="flex flex-col justify-center px-6 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-28">
           <Label className="text-cream/60">{site.craft.label}</Label>
-          <h2 className="mt-6 max-w-xl font-display text-[clamp(2.5rem,4.5vw,4.5rem)] leading-[1.02] font-light tracking-[-0.01em]">
+          <h2 className="mt-6 max-w-xl font-display text-[clamp(2.5rem,11vw,2.875rem)] leading-[1.02] font-light tracking-[-0.01em] lg:text-[clamp(2.5rem,4.5vw,4.5rem)]">
             <span data-headline-line className="js-headline-line">
               {site.craft.headline}
             </span>
@@ -58,7 +58,7 @@ export function CraftVessel() {
             {site.craft.body}
           </p>
 
-          <div className="mt-12 flex flex-col">
+          <div className="mt-10 flex flex-col sm:mt-12">
             {site.craft.details.map((detail) => (
               <div
                 key={detail.number}

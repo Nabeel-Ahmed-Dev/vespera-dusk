@@ -7,6 +7,7 @@ import { SocialProof } from "@/components/sections/SocialProof";
 import { OfferBuy } from "@/components/sections/OfferBuy";
 import { GuaranteeFaq } from "@/components/sections/GuaranteeFaq";
 import { FinalCtaFooter } from "@/components/sections/FinalCtaFooter";
+import { StickyBuyBar } from "@/components/sections/StickyBuyBar";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <GuaranteeFaq />
         <FinalCtaFooter />
       </main>
+      <StickyBuyBar />
     </>
   );
 }
