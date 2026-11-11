@@ -19,6 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${cormorant.variable} ${manrope.variable} ${montserrat.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <script

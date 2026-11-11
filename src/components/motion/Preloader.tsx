@@ -10,7 +10,8 @@ import {
   PRELOADED_DATA_ATTR,
 } from "@/lib/preloader";
 
-const PRELOADER_DURATION = 1.6;
+/** Total ritual length — curtain wipe then leave (~1.6–1.8s). */
+const PRELOADER_DURATION = 1.7;
 /** 18:47 as total minutes from 00:00. */
 const TARGET_MINUTES = 18 * 60 + 47;
 
@@ -35,6 +36,9 @@ function shouldSkipPreloader(): boolean {
  * Skipped on repeat visits (sessionStorage) and when prefers-reduced-motion.
  * Overlay is aria-hidden; page content stays available to assistive tech.
  * Visibility for skip is decided before paint via layout boot script + CSS.
+ *
+ * Transforms are GSAP-owned only — no Tailwind translate utilities (v4 `translate`
+ * property would fight GSAP's `transform` and leave letters/curtain off-screen).
  */
 export function Preloader() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -63,6 +67,7 @@ export function Preloader() {
       const clock = { minutes: 0 };
       clockEl.textContent = formatClock(0);
 
+      // Initial off-screen via GSAP transform (overrides any inline pre-paint hide).
       gsap.set(letterEls, { yPercent: 100 });
       gsap.set(curtain, { yPercent: 100 });
 
@@ -74,7 +79,7 @@ export function Preloader() {
         },
       });
 
-      // Clock + DUSK rise share the first beat; curtain then wipe + exit (~1.6s).
+      // Clock + DUSK rise share the first beat.
       tl.to(
         clock,
         {
@@ -97,25 +102,25 @@ export function Preloader() {
         0,
       );
 
+      // Gold curtain visibly wipes up over the night overlay, then leave.
       tl.to(
         curtain,
         {
           yPercent: 0,
           duration: 0.55,
         },
-        0.85,
+        0.95,
       );
 
       tl.to(
         root,
         {
           yPercent: -100,
-          duration: 0.55,
+          duration: 0.45,
         },
-        1.05,
+        1.35,
       );
 
-      // Keep total timeline length at the motion-spec 1.6s.
       tl.duration(PRELOADER_DURATION);
 
       return () => {
@@ -132,7 +137,7 @@ export function Preloader() {
       aria-hidden="true"
       className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-night text-cream"
     >
-      <div className="relative z-10 flex flex-col items-center gap-8">
+      <div className="relative z-10 flex flex-col items-center gap-5">
         <span
           ref={clockRef}
           className="text-[10px] font-semibold tracking-label text-cream/70 uppercase tabular-nums"
@@ -140,17 +145,22 @@ export function Preloader() {
           00:00
         </span>
 
+        {/* Same display size as hero wordmark; ivory/gold on night for contrast. */}
         <p
-          className="flex select-none items-center justify-center gap-[0.04em] font-display text-[clamp(4.5rem,18vw,9rem)] leading-none font-light tracking-[-0.03em] text-cream"
+          className="flex select-none items-center justify-center gap-[0.015em] font-display text-[clamp(5.5rem,33.8vw,8.25rem)] leading-[0.85] font-light tracking-[-0.02em] text-cream lg:text-[clamp(9rem,31vw,29rem)] lg:leading-[0.76] lg:tracking-[-0.045em]"
           aria-hidden="true"
         >
           {letters.map((letter, index) => (
-            <span key={`${letter}-${index}`} className="inline-block overflow-hidden">
+            <span
+              key={`${letter}-${index}`}
+              className="inline-block overflow-hidden leading-[0.85] lg:leading-[0.76]"
+            >
               <span
                 ref={(el) => {
                   if (el) lettersRef.current[index] = el;
                 }}
-                className="inline-block translate-y-full will-change-transform"
+                className="inline-block will-change-transform"
+                style={{ transform: "translateY(100%)" }}
               >
                 {letter}
               </span>
@@ -161,9 +171,10 @@ export function Preloader() {
 
       <div
         ref={curtainRef}
-        className="pointer-events-none absolute inset-0 z-20 translate-y-full will-change-transform"
+        className="pointer-events-none absolute inset-0 z-20 will-change-transform"
         style={{
           background: "linear-gradient(180deg, #E7C07F 0%, #A9681F 100%)",
+          transform: "translateY(100%)",
         }}
       />
     </div>
