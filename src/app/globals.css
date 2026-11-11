@@ -56,6 +56,17 @@ html[data-vd-preloaded] [data-vd-preloader] {
 }
 
 /*
+ * Hero load entrance flash guard: hide animated targets until GSAP gsap.set
+ * runs and removes [data-hero-entering]. Only when JS stamped html.js and
+ * motion is allowed — no-JS / reduced-motion users still see content.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-hero-entering] .js-hero-enter {
+    visibility: hidden;
+  }
+}
+
+/*
  * Live sunset scrub (Step 5): fixed layer + body use --sunset-bg.
  * Hero/Story/Notes yield (or feather) so one continuous sky shows through.
  * Reduced-motion leaves data-sunset unset — static section backgrounds stay.
