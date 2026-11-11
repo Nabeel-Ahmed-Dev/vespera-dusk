@@ -177,12 +177,18 @@ export function Hero() {
               if (sweeping) return;
               sweeping = true;
               idleCall?.kill();
+              const box = sweepBand.parentElement;
+              const boxW = box ? box.offsetWidth : 0;
+              const bandW = sweepBand.offsetWidth;
+              // Travel fully off-canvas on both sides so it never parks on the glass.
               gsap.fromTo(
                 sweepBand,
-                { xPercent: -120 },
+                { x: -bandW * 1.15, rotation: 18, opacity: 0 },
                 {
-                  xPercent: 120,
-                  duration: 1.2,
+                  x: boxW + bandW * 0.15,
+                  rotation: 18,
+                  keyframes: { opacity: [0, 1, 1, 0], easeEach: "none" },
+                  duration: 1.4,
                   ease: "sine.inOut",
                   onComplete: () => {
                     sweeping = false;
@@ -192,7 +198,7 @@ export function Hero() {
               );
             };
 
-            gsap.set(sweepBand, { xPercent: -120 });
+            gsap.set(sweepBand, { x: -9999, rotation: 18, opacity: 0 });
             armIdle(0);
 
             if (desktop) {
@@ -334,11 +340,14 @@ export function Hero() {
                     >
                       <div
                         ref={sweepBandRef}
-                        className="absolute top-0 left-0 h-full w-[45%]"
+                        className="absolute top-[-30%] left-0 h-[160%] w-[70%] will-change-transform"
                         style={{
+                          // Soft glow + thin specular line, diagonal via GSAP rotation.
                           background:
-                            "linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%)",
+                            "linear-gradient(90deg, rgba(255,246,228,0) 0%, rgba(255,240,214,0.10) 24%, rgba(255,244,224,0.38) 40%, rgba(255,252,244,0.70) 47%, rgba(255,255,255,0.95) 49%, rgba(255,252,244,0.70) 51%, rgba(255,244,224,0.30) 58%, rgba(255,240,214,0.08) 70%, rgba(255,246,228,0) 82%, rgba(255,255,255,0.45) 86%, rgba(255,246,228,0) 89%, rgba(255,246,228,0) 100%)",
                           mixBlendMode: "screen",
+                          filter: "blur(2px)",
+                          opacity: 0,
                         }}
                       />
                     </div>
