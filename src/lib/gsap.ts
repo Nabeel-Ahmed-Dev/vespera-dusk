@@ -2,9 +2,10 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 /** Reveal / enter eases — motion-spec. */
 export const EASE_REVEAL = "expo.out";
@@ -31,4 +32,4 @@ export const mmConditions = {
   reduce: "(prefers-reduced-motion: reduce)",
 } as const;
 
-export { gsap, ScrollTrigger, useGSAP };
+export { gsap, ScrollTrigger, SplitText, useGSAP };
