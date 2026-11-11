@@ -215,19 +215,19 @@ export const site: SiteContent = {
     },
     darkAmber: {
       src: "/images/img_dark_amber.png",
-      alt: "",
+      alt: "Dusk #01 bottle in amber light",
     },
     goldFlat: {
       src: "/images/img_gold_flat.jpg",
-      alt: "",
+      alt: "Dusk #01 flat lay",
     },
     labelClose: {
       src: "/images/img_label_close.png",
-      alt: "",
+      alt: "Dusk #01 label close-up",
     },
     topdown: {
       src: "/images/img_topdown.png",
-      alt: "",
+      alt: "Dusk #01 from above",
     },
   },
   nav: {
