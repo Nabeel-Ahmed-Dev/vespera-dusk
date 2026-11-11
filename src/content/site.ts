@@ -56,6 +56,7 @@ export type FaqItem = {
 };
 
 export type FooterLinkGroup = {
+  heading: string;
   links: { label: string; href: string }[];
 };
 
@@ -182,9 +183,11 @@ export type SiteContent = {
     newsletterBody: string;
     emailPlaceholder: string;
     subscribe: string;
+    brandTagline: string;
     linkGroups: FooterLinkGroup[];
     logo: string;
     copyright: string;
+    legalLinks: { label: string; href: string }[];
   };
   stickyBuy: {
     title: string;
@@ -455,27 +458,49 @@ export const site: SiteContent = {
   },
   footer: {
     newsletterTitle: "Join the Night List",
-    newsletterBody: "First access to Batch 02 and 10% off your first order.",
+    newsletterBody:
+      "First access to Batch 02, private launches, and 10% off your first order.",
     emailPlaceholder: "your@email.com",
-    subscribe: "Subscribe →",
+    subscribe: "SUBSCRIBE →",
+    brandTagline:
+      "Perfume for the hours in between. Composed in Grasse, numbered by hand.",
     linkGroups: [
       {
+        heading: "SHOP",
         links: [
           { label: "Dusk #01", href: "#offer" },
-          { label: "Discovery vial", href: "#offer" },
-          { label: "Refills", href: "#vessel" },
+          { label: "Discovery vial", href: "#" },
+          { label: "Refills", href: "#" },
+          { label: "Gift cards", href: "#" },
         ],
       },
       {
+        heading: "HOUSE",
         links: [
-          { label: "Our story", href: "#story" },
-          { label: "Shipping", href: "#faq" },
-          { label: "Contact", href: "#footer" },
+          { label: "Our story", href: "#" },
+          { label: "The perfumer", href: "#" },
+          { label: "Journal", href: "#" },
+          { label: "Stockists", href: "#" },
+        ],
+      },
+      {
+        heading: "CARE",
+        links: [
+          { label: "Shipping", href: "#" },
+          { label: "Returns & refunds", href: "#" },
+          { label: "FAQ", href: "#faq" },
+          { label: "Contact", href: "#" },
         ],
       },
     ],
     logo: "VESPERA",
-    copyright: "© 2026 Vespera Parfums — concept design",
+    copyright: "© 2026 VESPERA PARFUMS — CONCEPT DESIGN",
+    legalLinks: [
+      { label: "PRIVACY", href: "#" },
+      { label: "TERMS", href: "#" },
+      { label: "INSTAGRAM", href: "#" },
+      { label: "TIKTOK", href: "#" },
+    ],
   },
   stickyBuy: {
     title: "Dusk #01",
