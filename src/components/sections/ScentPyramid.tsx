@@ -15,6 +15,7 @@ import {
 import { whenPreloaded } from "@/lib/preloader";
 
 const BAND_ORDER = ["base", "heart", "top"] as const;
+const HIGHLIGHT_ORDER = ["top", "heart", "base"] as const;
 
 export function ScentPyramid() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,10 @@ export function ScentPyramid() {
       const body = bodyRef.current;
       const pyramid = pyramidRef.current;
       if (!root || !headline || !body || !pyramid) return;
+
+      const section =
+        (root.closest("[data-section='scent-pyramid']") as HTMLElement | null) ??
+        root;
 
       const headlineLines = headline.querySelectorAll<HTMLElement>(
         "[data-headline-line]",
@@ -88,6 +93,7 @@ export function ScentPyramid() {
           const revealedRows = new Set<Element>();
           let activeKey: string | null = null;
           let hoverDuration = 0;
+          let pinST: ScrollTrigger | undefined;
           const cleanups: Array<() => void> = [];
 
           const applyHighlight = () => {
@@ -120,10 +126,12 @@ export function ScentPyramid() {
 
             rows.forEach((row) => {
               const onEnter = () => {
+                if (pinST?.isActive) return;
                 activeKey = row.getAttribute("data-pyramid-row");
                 applyHighlight();
               };
               const onLeave = () => {
+                if (pinST?.isActive) return;
                 activeKey = null;
                 applyHighlight();
               };
@@ -175,6 +183,74 @@ export function ScentPyramid() {
             scaleY: 0,
             opacity: 1,
           });
+
+          // Pin + scrub highlights first so pin spacing is known before reveals.
+          if (!mobile) {
+            const INTRO = 0.08;
+            const OUTRO = 0.1;
+            const MID = 1 - INTRO - OUTRO;
+            const PHASE = MID / 3;
+            const CROSS = PHASE * 0.35;
+            const HOLD = PHASE * 0.65;
+            const OUTRO_CROSS = OUTRO * 0.35;
+            const OUTRO_HOLD = OUTRO * 0.65;
+
+            const highlightTl = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: () => "+=" + window.innerHeight * 2.4,
+                pin: true,
+                pinSpacing: true,
+                scrub: 1,
+                invalidateOnRefresh: true,
+                anticipatePin: 1,
+              },
+            });
+
+            pinST = highlightTl.scrollTrigger ?? undefined;
+
+            highlightTl.set([...bands, ...rows], { opacity: 1 });
+            highlightTl.to({}, { duration: INTRO });
+
+            let t = INTRO;
+            for (const key of HIGHLIGHT_ORDER) {
+              for (const band of bands) {
+                const bandKey = band.getAttribute("data-pyramid-band");
+                highlightTl.to(
+                  band,
+                  {
+                    opacity: bandKey === key ? 1 : 0.3,
+                    duration: CROSS,
+                  },
+                  t,
+                );
+              }
+              for (const row of rows) {
+                const rowKey = row.getAttribute("data-pyramid-row");
+                highlightTl.to(
+                  row,
+                  {
+                    opacity: rowKey === key ? 1 : 0.45,
+                    duration: CROSS,
+                  },
+                  t,
+                );
+              }
+              t += CROSS + HOLD;
+            }
+
+            for (const band of bands) {
+              highlightTl.to(band, { opacity: 1, duration: OUTRO_CROSS }, t);
+            }
+            for (const row of rows) {
+              highlightTl.to(row, { opacity: 1, duration: OUTRO_CROSS }, t);
+            }
+            if (OUTRO_HOLD > 0) {
+              highlightTl.to({}, { duration: OUTRO_HOLD });
+            }
+          }
 
           const introTl = gsap
             .timeline({ paused: true })
@@ -280,6 +356,8 @@ export function ScentPyramid() {
             });
           });
 
+          ScrollTrigger.refresh();
+
           return () => {
             cleanups.forEach((fn) => fn());
           };
@@ -299,15 +377,15 @@ export function ScentPyramid() {
       id="notes"
       dataSection="scent-pyramid"
       aria-label="Scent pyramid"
-      className="overflow-hidden bg-night text-cream"
+      className="overflow-hidden bg-night text-cream lg:h-[100dvh]"
     >
       <div
         ref={rootRef}
-        className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-32"
+        className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-8 sm:py-20 lg:flex lg:h-full lg:flex-col lg:justify-center lg:px-16 lg:py-[clamp(2.5rem,7dvh,6rem)]"
       >
         <Label className="text-cream/60">{site.scentPyramid.label}</Label>
 
-        <div className="mt-7 grid gap-10 sm:mt-8 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-24">
+        <div className="mt-7 grid gap-10 sm:mt-8 sm:gap-12 lg:mt-[clamp(1rem,2.5dvh,1.75rem)] lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-24">
           <div>
             <h2
               ref={headlineRef}
@@ -329,7 +407,7 @@ export function ScentPyramid() {
             </h2>
             <p
               ref={bodyRef}
-              className="mt-6 max-w-md text-[15px] leading-relaxed text-cream/70"
+              className="mt-6 max-w-md text-[15px] leading-relaxed text-cream/70 lg:mt-[clamp(0.75rem,2dvh,1.5rem)]"
             >
               {site.scentPyramid.body}
             </p>
@@ -337,7 +415,7 @@ export function ScentPyramid() {
             <svg
               ref={pyramidRef}
               viewBox="0 0 520 460"
-              className="mt-10 w-full max-w-[420px] sm:mt-12"
+              className="mt-10 w-full max-w-[420px] sm:mt-12 lg:mt-[clamp(1.25rem,3dvh,2.5rem)] lg:max-w-[min(420px,calc((100dvh-380px)*1.13))]"
               aria-hidden
             >
               <defs>
@@ -381,15 +459,15 @@ export function ScentPyramid() {
                 key={tier.phase}
                 data-pyramid-row={tier.phase.toLowerCase()}
                 tabIndex={0}
-                className="js-pyramid-row border-t border-cream/15 py-7"
+                className="js-pyramid-row border-t border-cream/15 py-7 lg:py-[clamp(0.875rem,2.2dvh,1.75rem)]"
               >
                 <Label className="text-cream/50">
                   {tier.roman} · {tier.phase} — {tier.timing}
                 </Label>
-                <h3 className="mt-3 font-display text-[clamp(1.75rem,8vw,2.125rem)] font-light lg:text-[clamp(1.75rem,3vw,2.25rem)]">
+                <h3 className="mt-3 font-display text-[clamp(1.75rem,8vw,2.125rem)] font-light lg:mt-[clamp(0.5rem,1.2dvh,0.75rem)] lg:text-[clamp(1.75rem,3vw,2.25rem)]">
                   {tier.title}
                 </h3>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2 lg:mt-[clamp(0.625rem,1.5dvh,1rem)]">
                   {tier.notes.map((note) => (
                     <span
                       key={note}
@@ -402,7 +480,7 @@ export function ScentPyramid() {
                 </div>
               </div>
             ))}
-            <Label className="mt-6 text-cream/35">
+            <Label className="mt-6 text-cream/35 lg:mt-[clamp(0.75rem,2dvh,1.5rem)]">
               {site.scentPyramid.disclaimer}
             </Label>
           </div>
