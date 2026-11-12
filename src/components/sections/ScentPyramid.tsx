@@ -17,19 +17,24 @@ import { whenPreloaded } from "@/lib/preloader";
 const BAND_ORDER = ["base", "heart", "top"] as const;
 const HIGHLIGHT_ORDER = ["top", "heart", "base"] as const;
 
+const NUMERAL_STYLE = {
+  fontFamily: "var(--font-display)",
+  fontSize: 44,
+  fontStyle: "italic",
+  fontWeight: 300,
+} as const;
+
 export function ScentPyramid() {
   const rootRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
-  const bodyRef = useRef<HTMLParagraphElement>(null);
   const pyramidRef = useRef<SVGSVGElement>(null);
 
   useGSAP(
     () => {
       const root = rootRef.current;
       const headline = headlineRef.current;
-      const body = bodyRef.current;
       const pyramid = pyramidRef.current;
-      if (!root || !headline || !body || !pyramid) return;
+      if (!root || !headline || !pyramid) return;
 
       const section =
         (root.closest("[data-section='scent-pyramid']") as HTMLElement | null) ??
@@ -38,6 +43,10 @@ export function ScentPyramid() {
       const headlineLines = headline.querySelectorAll<HTMLElement>(
         "[data-headline-line]",
       );
+      const bodies = gsap.utils.toArray<HTMLElement>(
+        root.querySelectorAll("[data-pyramid-body]"),
+      );
+      if (bodies.length === 0) return;
       const bands = BAND_ORDER.map((name) =>
         pyramid.querySelector<SVGGElement>(`[data-pyramid-band="${name}"]`),
       ).filter((el): el is SVGGElement => Boolean(el));
@@ -58,16 +67,14 @@ export function ScentPyramid() {
         if (!isMobile && headlineLines[1]) {
           gsap.set(headlineLines[1], { x: 40 });
         }
-        gsap.set(body, { opacity: 0, y: 24 });
+        gsap.set(bodies, { opacity: 0, y: 24 });
         gsap.set(bands, {
           transformOrigin: "50% 100%",
           scaleY: 0,
         });
         rows.forEach((row) => {
-          const labelEl = row.children[0] as HTMLElement | undefined;
-          const titleEl = row.querySelector<HTMLElement>("h3");
-          const fadeText = [labelEl, titleEl].filter(
-            (el): el is HTMLElement => Boolean(el),
+          const fadeText = gsap.utils.toArray<HTMLElement>(
+            row.querySelectorAll("[data-pyramid-fade]"),
           );
           const pills = row.querySelectorAll("[data-note-pill]");
           gsap.set(fadeText, { opacity: 0, y: 20 });
@@ -177,7 +184,7 @@ export function ScentPyramid() {
           if (!mobile && headlineLines[1]) {
             gsap.set(headlineLines[1], { x: 40 });
           }
-          gsap.set(body, { opacity: 0, y: 24 });
+          gsap.set(bodies, { opacity: 0, y: 24 });
           gsap.set(bands, {
             transformOrigin: "50% 100%",
             scaleY: 0,
@@ -262,7 +269,7 @@ export function ScentPyramid() {
               ease: EASE_REVEAL,
             })
             .to(
-              body,
+              bodies,
               {
                 opacity: 1,
                 y: 0,
@@ -306,10 +313,8 @@ export function ScentPyramid() {
           });
 
           rows.forEach((row) => {
-            const labelEl = row.children[0] as HTMLElement | undefined;
-            const titleEl = row.querySelector<HTMLElement>("h3");
-            const fadeText = [labelEl, titleEl].filter(
-              (el): el is HTMLElement => Boolean(el),
+            const fadeText = gsap.utils.toArray<HTMLElement>(
+              row.querySelectorAll("[data-pyramid-fade]"),
             );
             const pills = gsap.utils.toArray<HTMLElement>(
               row.querySelectorAll("[data-note-pill]"),
@@ -406,10 +411,16 @@ export function ScentPyramid() {
               </span>
             </h2>
             <p
-              ref={bodyRef}
-              className="mt-6 max-w-md text-[15px] leading-relaxed text-cream/70 lg:mt-[clamp(0.75rem,2dvh,1.5rem)]"
+              data-pyramid-body
+              className="mt-6 max-w-md text-[15px] leading-relaxed text-cream/70 lg:hidden"
             >
               {site.scentPyramid.body}
+            </p>
+            <p
+              data-pyramid-body
+              className="mt-6 hidden max-w-md text-[15px] leading-relaxed text-cream/70 lg:mt-[clamp(0.75rem,2dvh,1.5rem)] lg:block"
+            >
+              {site.scentPyramid.bodyLong}
             </p>
 
             <svg
@@ -437,18 +448,49 @@ export function ScentPyramid() {
                   points="260,0 344.8,150 175.2,150"
                   fill="url(#pyramid-top)"
                 />
+                <text
+                  x="260"
+                  y="108"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  aria-hidden
+                  style={{ ...NUMERAL_STYLE, fill: "rgba(14, 11, 8, 0.7)" }}
+                >
+                  I
+                </text>
               </g>
               <g data-pyramid-band="heart" className="js-pyramid-band">
                 <polygon
                   points="173,156 347,156 432.9,306 87.1,306"
                   fill="url(#pyramid-heart)"
                 />
+                <text
+                  x="260"
+                  y="231"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  aria-hidden
+                  style={{ ...NUMERAL_STYLE, fill: "rgba(14, 11, 8, 0.7)" }}
+                >
+                  II
+                </text>
               </g>
               <g data-pyramid-band="base" className="js-pyramid-band">
                 <polygon
                   points="84.8,312 435.2,312 520,460 0,460"
                   fill="url(#pyramid-base)"
                 />
+                <text
+                  x="260"
+                  y="386"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  aria-hidden
+                  className="fill-honey3"
+                  style={NUMERAL_STYLE}
+                >
+                  III
+                </text>
               </g>
             </svg>
           </div>
@@ -461,12 +503,23 @@ export function ScentPyramid() {
                 tabIndex={0}
                 className="js-pyramid-row border-t border-cream/15 py-7 lg:py-[clamp(0.875rem,2.2dvh,1.75rem)]"
               >
-                <Label className="text-cream/50">
-                  {tier.roman} · {tier.phase} — {tier.timing}
-                </Label>
-                <h3 className="mt-3 font-display text-[clamp(1.75rem,8vw,2.125rem)] font-light lg:mt-[clamp(0.5rem,1.2dvh,0.75rem)] lg:text-[clamp(1.75rem,3vw,2.25rem)]">
+                <div data-pyramid-fade>
+                  <Label className="text-cream/50">
+                    {tier.roman} · {tier.phase} — {tier.timing}
+                  </Label>
+                </div>
+                <h3
+                  data-pyramid-fade
+                  className="mt-3 font-display text-[clamp(1.75rem,8vw,2.125rem)] font-light lg:mt-[clamp(0.5rem,1.2dvh,0.75rem)] lg:text-[clamp(1.75rem,3vw,2.25rem)]"
+                >
                   {tier.title}
                 </h3>
+                <p
+                  data-pyramid-fade
+                  className="mt-2 hidden text-[15px] leading-relaxed text-cream/60 lg:mt-[clamp(0.25rem,0.8dvh,0.5rem)] lg:block"
+                >
+                  {tier.description}
+                </p>
                 <div className="mt-4 flex flex-wrap gap-2 lg:mt-[clamp(0.625rem,1.5dvh,1rem)]">
                   {tier.notes.map((note) => (
                     <span
