@@ -412,13 +412,7 @@ export function ScentPyramid() {
             </h2>
             <p
               data-pyramid-body
-              className="mt-6 max-w-md text-[15px] leading-relaxed text-cream/70 lg:hidden"
-            >
-              {site.scentPyramid.body}
-            </p>
-            <p
-              data-pyramid-body
-              className="mt-6 hidden max-w-md text-[15px] leading-relaxed text-cream/70 lg:mt-[clamp(0.75rem,2dvh,1.5rem)] lg:block"
+              className="mt-6 max-w-md text-[15px] leading-relaxed text-cream/70 lg:mt-[clamp(0.75rem,2dvh,1.5rem)]"
             >
               {site.scentPyramid.bodyLong}
             </p>
@@ -516,7 +510,7 @@ export function ScentPyramid() {
                 </h3>
                 <p
                   data-pyramid-fade
-                  className="mt-2 hidden text-[15px] leading-relaxed text-cream/60 lg:mt-[clamp(0.25rem,0.8dvh,0.5rem)] lg:block"
+                  className="mt-2 text-[15px] leading-relaxed text-cream/60 lg:mt-[clamp(0.25rem,0.8dvh,0.5rem)]"
                 >
                   {tier.description}
                 </p>
