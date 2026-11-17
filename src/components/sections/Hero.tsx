@@ -390,7 +390,7 @@ export function Hero() {
       id="hero"
       dataSection="hero"
       aria-label="Hero"
-      className="min-h-screen overflow-hidden bg-[radial-gradient(ellipse_at_50%_40%,#F6DCA8_0%,#D9A355_58%,#A9681F_100%)] text-night"
+      className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,transparent_72%,#A9681F_100%),radial-gradient(ellipse_at_50%_40%,#F6DCA8_0%,#D9A355_58%,#A9681F_100%)] text-night"
     >
       <div
         ref={rootRef}
