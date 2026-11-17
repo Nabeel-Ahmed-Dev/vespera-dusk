@@ -499,7 +499,7 @@ export const site: SiteContent = {
       {
         question: "When does Batch 01 sell out — and what then?",
         answer:
-          "347 of 1,200 Batch 01 bottles remain · Batch 02 is not scheduled.",
+          "When the last of the 1,200 bottles is claimed, Batch 01 closes for good — Batch 02 is not yet scheduled. Join the newsletter below to hear first, and refills stay available for every Batch 01 vessel.",
       },
     ],
   },
