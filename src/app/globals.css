@@ -76,10 +76,19 @@ html[data-sunset="live"] body {
   background: var(--sunset-bg);
 }
 
-/* Radial glow at scroll 0, feathered into the fixed sunset at the bottom. */
+/*
+ * Radial glow at scroll 0, feathered into the fixed sunset at the bottom.
+ * The top layer fades the hero's last rows into the live --sunset-bg, so
+ * the hero meets Story (transparent, showing the same sky) with no seam.
+ */
 html[data-sunset="live"] [data-section="hero"] {
   background-color: transparent;
-  background-image: radial-gradient(
+  background-image: linear-gradient(
+      180deg,
+      transparent 72%,
+      var(--sunset-bg, #e7c07f) 100%
+    ),
+    radial-gradient(
     ellipse 120% 95% at 50% 38%,
     #f6dca8 0%,
     #d9a355 42%,
