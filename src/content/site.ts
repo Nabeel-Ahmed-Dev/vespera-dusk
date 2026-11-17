@@ -15,6 +15,7 @@ export type ScentNoteTier = {
   phase: "Top" | "Heart" | "Base";
   timing: string;
   title: string;
+  description: string;
   notes: string[];
 };
 
@@ -122,6 +123,7 @@ export type SiteContent = {
     headline: string;
     headlineItalic: string;
     body: string;
+    bodyLong: string;
     disclaimer: string;
     tiers: ScentNoteTier[];
   };
@@ -283,6 +285,7 @@ export const site: SiteContent = {
     headline: "Composed in ",
     headlineItalic: "three movements.",
     body: "Gilded at first spray, molten at its heart, and finally as deep as the night that follows.",
+    bodyLong: "Like dusk itself, Dusk #01 unfolds in time — gilded at first spray, molten at its heart, and finally as deep as the night that follows.",
     disclaimer: "Notes shown are a design concept — final formula TBC",
     tiers: [
       {
@@ -290,6 +293,7 @@ export const site: SiteContent = {
         phase: "Top",
         timing: "0 to 15 min",
         title: "The First Light",
+        description: "Gilded, sparkling, a little bitter-bright.",
         notes: ["Calabrian Bergamot", "Saffron", "Pink Pepper"],
       },
       {
@@ -297,6 +301,7 @@ export const site: SiteContent = {
         phase: "Heart",
         timing: "15 min to 4 h",
         title: "The Golden Hour",
+        description: "Molten and floral; warm skin in late sun.",
         notes: ["Turkish Rose", "Jasmine Sambac", "Labdanum"],
       },
       {
@@ -304,6 +309,7 @@ export const site: SiteContent = {
         phase: "Base",
         timing: "4 h to dawn",
         title: "The Night",
+        description: "Resinous, smoky, impossibly soft.",
         notes: ["Oud", "Ambergris Accord", "Madagascar Vanilla", "Tonka"],
       },
     ],
