@@ -39,6 +39,9 @@ export function CraftVessel() {
               className="object-cover"
             />
           </div>
+          <Label className="absolute bottom-6 left-6 z-10 hidden text-cream/80 lg:block lg:bottom-10 lg:left-12">
+            {site.craft.figCaption}
+          </Label>
         </div>
 
         <div className="flex flex-col justify-center px-6 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-28">

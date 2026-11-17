@@ -132,15 +132,19 @@ export type SiteContent = {
     headline: string;
     headlineItalic: string;
     body: string;
+    figCaption: string;
     details: CraftDetail[];
   };
   socialProof: {
     label: string;
     quote: string;
     quoteAttribution: string;
+    pressLabel: string;
     press: PressLogo[];
+    pressFootnote: string;
     rating: number;
     ratingLabel: string;
+    reviewsLink: string;
     reviews: Review[];
     disclaimer: string;
   };
@@ -150,6 +154,7 @@ export type SiteContent = {
     figCaption: string;
     title: string;
     subtitle: string;
+    subtitleRating: string;
     price: number;
     compareAt: number;
     compareAtLabel: string;
@@ -162,7 +167,7 @@ export type SiteContent = {
     stockPercent: number;
     stockClaimed: string;
     stockLeft: string;
-    perks: string[];
+    perks: { title: string; detail: string }[];
   };
   guarantee: {
     items: GuaranteeItem[];
@@ -171,6 +176,7 @@ export type SiteContent = {
     label: string;
     headline: string;
     headlineItalic: string;
+    note: string;
     items: FaqItem[];
   };
   finalCta: {
@@ -179,6 +185,7 @@ export type SiteContent = {
     headlineItalic: string;
     primaryCta: string;
     secondaryCta: string;
+    scarcity: string;
   };
   footer: {
     newsletterTitle: string;
@@ -258,7 +265,7 @@ export const site: SiteContent = {
     description:
       "An amber eau de parfum of saffron, smoked rose and warm oud. Composed for the last light of the day.",
     cta: "Add to bag — $185",
-    stock: "347 of 1,200 Batch 01 bottles left",
+    stock: "Batch 01 — 347 of 1,200 bottles left",
     discover: "Discover Dusk ↓",
     perks: "Free shipping · 30-day wear test · Free 2 ml sample",
     scrollHint: "( Scroll to descend )",
@@ -276,8 +283,8 @@ export const site: SiteContent = {
     badgeLabel: "First edition",
     stats: [
       { value: "18:47", label: "The minute it was composed for" },
-      { value: "22%", label: "Extrait-level concentration" },
-      { value: "12h+", label: "First light to last" },
+      { value: "22%", label: "Extrait-level concentration of oils" },
+      { value: "12h+", label: "From the first light to the last" },
     ],
   },
   scentPyramid: {
@@ -318,27 +325,28 @@ export const site: SiteContent = {
     label: "( 03 ) The vessel",
     headline: "Cut like crystal. ",
     headlineItalic: "Weighted like a promise.",
-    body: "Heavy faceted glass, a hand-cut stopper that catches light like the sun's last edge, and a label applied by hand.",
+    body: "Each bottle is pressed from heavy, faceted glass and crowned with a hand-cut stopper that catches light like the sun's last edge. The label is applied by hand — slightly imperfect, entirely ours.",
+    figCaption: "Fig. 02 — The label, applied by hand",
     details: [
       {
         number: "01",
         title: "Faceted crystal stopper",
-        description: "Hand-cut, 24 facets.",
+        description: "Hand-cut, 24 facets — it throws light across the room.",
       },
       {
         number: "02",
         title: "380 g weighted base",
-        description: "Substantial in the hand.",
+        description: "Substantial in the hand, steady on the vanity.",
       },
       {
         number: "03",
         title: "Numbered by hand",
-        description: "Each Batch 01 bottle, 1–1,200.",
+        description: "Every Batch 01 bottle carries its own number, 1–1,200.",
       },
       {
         number: "04",
         title: "Made to be refilled",
-        description: "100 ml refills at 30% less.",
+        description: "100 ml refills at 30% less — keep the vessel forever.",
       },
     ],
   },
@@ -346,38 +354,53 @@ export const site: SiteContent = {
     label: "( 04 ) Worn at dusk",
     quote: "“Smells like the last warm minute of summer.”",
     quoteAttribution: "— Beauty editor, Vogue (placeholder)",
+    pressLabel: "As seen in*",
     press: [
       { name: "VOGUE" },
+      { name: "Harper's BAZAAR" },
       { name: "ELLE" },
-      { name: "GQ" },
       { name: "Wallpaper*" },
+      { name: "GQ" },
+      { name: "Le Monde" },
     ],
+    pressFootnote:
+      "* Placeholder wordmarks — replace with licensed press logos",
     rating: 4.9,
-    ratingLabel: "from 2,184 verified reviews",
+    ratingLabel:
+      "Average from 2,184 verified reviews. 94% would buy it again.",
+    reviewsLink: "Read all reviews →",
     reviews: [
       {
         quote:
-          "“I get stopped every single evening. Expensive, but warm — never loud.”",
+          "“I get stopped every single evening. It smells expensive, but warm — never loud.”",
         author: "Amira K.",
-        meta: "Verified buyer",
+        meta: "Verified buyer · Wears it to dinner",
+        stars: 5,
+      },
+      {
+        quote:
+          "“The saffron opening is pure gold, then it melts into skin. Lasts until morning.”",
+        author: "Daniel R.",
+        meta: "Verified buyer · 100 ml",
         stars: 5,
       },
       {
         quote:
           "“Started with the sample. Bought the full bottle the next day.”",
         author: "Sofia M.",
-        meta: "Verified buyer",
+        meta: "Verified buyer · Discovery sample → 100 ml",
         stars: 5,
       },
     ],
-    disclaimer: "All quotes, names, ratings & press are placeholders",
+    disclaimer: "All quotes, names & press are placeholders",
   },
   offer: {
     label: "( 05 ) Make it yours",
     batchBadge: "● Batch 01 — hand-numbered",
     figCaption: "Fig. 03 — Dusk #01, 100 ml",
     title: "Dusk #01",
-    subtitle: "Eau de Parfum · ★★★★★ 4.9 (2,184)",
+    subtitle: "Eau de Parfum · Batch 01",
+    subtitleRating: "★★★★★ 4.9 (2,184)",
     price: 185,
     compareAt: 240,
     compareAtLabel: "$240",
@@ -396,37 +419,54 @@ export const site: SiteContent = {
         volume: "100 ml",
         price: 185,
         priceLabel: "$185",
-        perMl: "$1.85 / ml · best value",
+        perMl: "$1.85 / ml — best value",
         badge: "Most chosen",
         selected: true,
       },
     ],
     sample:
-      "Not sure yet? Try the 2 ml vial first — $8, credited to your bottle.",
+      "Not sure yet? Try the 2 ml Discovery vial first — $8, fully credited toward your bottle.",
     cta: "Add to bag — $185 →",
-    payments: "or 4 interest-free payments of $46.25",
+    payments: "or 4 interest-free payments of $46.25 · Ships in 24 h",
     stockPercent: 71,
-    stockClaimed: "71% claimed",
+    stockClaimed: "Batch 01 — 71% claimed",
     stockLeft: "347 of 1,200 left",
     perks: [
-      "✓ Free express shipping",
-      "✓ 30-day Dusk Promise — full refund",
-      "✓ Complimentary engraving & gift box",
+      {
+        title: "Free express shipping",
+        detail: "Delivered in 2–4 days, tracked.",
+      },
+      {
+        title: "The 30-day Dusk Promise",
+        detail: "Wear it a month. Not your hour? Full refund.",
+      },
+      {
+        title: "Complimentary engraving",
+        detail: "Initials or a date on the base.",
+      },
+      {
+        title: "Gift-ready",
+        detail: "Signature box & handwritten card.",
+      },
     ],
   },
   guarantee: {
     items: [
       {
         title: "Free express shipping",
-        detail: "every order",
+        detail: "On every order, worldwide.",
       },
       {
         title: "30-day Dusk Promise",
-        detail: "full refund",
+        detail: "Full refund — even if it's empty.",
       },
       {
         title: "Sample first",
-        detail: "credited to your bottle",
+        detail: "2 ml vial, credited to your bottle.",
+      },
+      {
+        title: "Refill forever",
+        detail: "Vegan, cruelty-free, refillable.",
       },
     ],
   },
@@ -434,10 +474,12 @@ export const site: SiteContent = {
     label: "( 06 ) Before you decide",
     headline: "Questions, ",
     headlineItalic: "answered.",
+    note: "Still curious? Write to us — a real person replies within the hour.",
     items: [
       {
-        question: "How long does it last?",
-        answer: "Around 10–12 hours on skin and longer on fabric.",
+        question: "How long does Dusk #01 last?",
+        answer:
+          "Around 10–12 hours on skin and longer on fabric. The base of oud and amber is designed to stay close and warm well into the night.",
       },
       {
         question: "What if it isn't for me?",
@@ -445,7 +487,7 @@ export const site: SiteContent = {
           "Wear it for up to 30 days under the Dusk Promise. If it isn't your hour, return it for a full refund — no questions asked.",
       },
       {
-        question: "Can I try it first?",
+        question: "Can I try it before buying the full bottle?",
         answer:
           "Yes. Start with the 2 ml Discovery vial for $8 — fully credited when you buy a full bottle.",
       },
@@ -453,6 +495,11 @@ export const site: SiteContent = {
         question: "Is it unisex?",
         answer:
           "Yes. Dusk #01 was composed without a gendered brief — an amber hour meant to be worn by anyone.",
+      },
+      {
+        question: "When does Batch 01 sell out — and what then?",
+        answer:
+          "347 of 1,200 Batch 01 bottles remain · Batch 02 is not scheduled.",
       },
     ],
   },
@@ -462,6 +509,8 @@ export const site: SiteContent = {
     headlineItalic: "the hour.",
     primaryCta: "Claim your bottle — $185 →",
     secondaryCta: "Try the sample — $8",
+    scarcity:
+      "347 of 1,200 Batch 01 bottles remain · Batch 02 is not scheduled",
   },
   footer: {
     newsletterTitle: "Join the Night List",

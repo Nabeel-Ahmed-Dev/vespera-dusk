@@ -35,19 +35,22 @@ export function SocialProof() {
           </Label>
         </blockquote>
 
-        {/* Mobile / tablet: single fitting row. Desktop: marquee track. */}
-        <div className="mt-10 flex items-center justify-between gap-3 border-y border-night/15 py-5 opacity-55 sm:mt-12 sm:gap-4 sm:py-6 lg:hidden">
+        {/* Mobile / tablet: wrapping row. Desktop: marquee track. */}
+        <Label className="mt-10 text-night/55 sm:mt-12 lg:mt-14">
+          {site.socialProof.pressLabel}
+        </Label>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 border-y border-night/15 py-5 opacity-55 sm:mt-4 sm:gap-x-6 sm:py-6 lg:hidden">
           {site.socialProof.press.map((logo) => (
             <span
               key={logo.name}
-              className="font-logo shrink min-w-0 text-[clamp(0.7rem,3.4vw,1.125rem)] tracking-[0.08em] uppercase sm:tracking-[0.12em]"
+              className="font-logo whitespace-nowrap text-[clamp(0.7rem,3.4vw,1.125rem)] tracking-[0.08em] uppercase sm:tracking-[0.12em]"
             >
               {logo.name}
             </span>
           ))}
         </div>
 
-        <div className="relative mt-14 hidden overflow-hidden border-y border-night/15 py-6 lg:block">
+        <div className="relative mt-4 hidden overflow-hidden border-y border-night/15 py-6 lg:block">
           <div
             data-marquee-track
             className="js-marquee-track flex w-max items-center gap-16 opacity-55"
@@ -63,7 +66,7 @@ export function SocialProof() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:mt-12 sm:gap-6 lg:mt-14 lg:grid-cols-[0.7fr_1fr_1fr]">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:gap-6 lg:mt-14 lg:grid-cols-[0.7fr_1fr_1fr_1fr]">
           <div
             data-review-card="rating"
             className="js-review-card flex flex-row items-end gap-4 border border-night/10 bg-cream5 p-6 sm:p-8 lg:flex-col lg:justify-end lg:gap-0"
@@ -76,6 +79,12 @@ export function SocialProof() {
               <p className="mt-1 text-[13px] leading-snug text-night/65 lg:mt-2">
                 {site.socialProof.ratingLabel}
               </p>
+              <a
+                href="#reviews"
+                className="mt-3 inline-block text-[13px] font-medium text-pretty underline decoration-night/30 underline-offset-4"
+              >
+                {site.socialProof.reviewsLink}
+              </a>
             </div>
           </div>
 
@@ -98,6 +107,9 @@ export function SocialProof() {
         </div>
 
         <Label className="mt-8 text-night/40">{site.socialProof.disclaimer}</Label>
+        <Label className="mt-2 text-night/40">
+          {site.socialProof.pressFootnote}
+        </Label>
       </div>
     </SectionShell>
   );

@@ -85,7 +85,13 @@ export function OfferBuy() {
           <h2 className="mt-5 font-display text-[clamp(2.75rem,14vw,3.75rem)] leading-[0.9] font-light lg:text-[clamp(3rem,5vw,4.5rem)] lg:leading-[0.92]">
             {site.offer.title}
           </h2>
-          <p className="mt-3 text-[13px] text-night/70">{site.offer.subtitle}</p>
+          <p className="mt-3 text-[13px] text-night/70">
+            {site.offer.subtitle}
+            <span aria-hidden className="mx-2 text-night/30">
+              |
+            </span>
+            {site.offer.subtitleRating}
+          </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <span
@@ -166,7 +172,13 @@ export function OfferBuy() {
 
           <ul className="mt-8 space-y-2.5 border-t border-night/10 pt-6 text-[13px] font-semibold">
             {site.offer.perks.map((perk) => (
-              <li key={perk}>{perk}</li>
+              <li key={perk.title}>
+                <span aria-hidden>✓ </span>
+                {perk.title}
+                <span className="mt-0.5 block text-xs font-normal text-night/55">
+                  {perk.detail}
+                </span>
+              </li>
             ))}
           </ul>
 

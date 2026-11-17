@@ -18,9 +18,9 @@ export function GuaranteeFaq() {
               data-guarantee-item
               className="js-guarantee-item font-display text-xl font-normal lg:text-[22px]"
             >
-              {item.title}{" "}
-              <span className="font-sans text-xs text-cream/55">
-                — {item.detail}
+              {item.title}
+              <span className="mt-1 block font-sans text-xs text-cream/55">
+                {item.detail}
               </span>
             </p>
           ))}
@@ -42,6 +42,9 @@ export function GuaranteeFaq() {
                 {site.faq.headlineItalic}
               </span>
             </h2>
+            <p className="mt-6 max-w-[340px] text-sm leading-relaxed text-night/70">
+              {site.faq.note}
+            </p>
           </div>
 
           <div className="border-t border-night/15">
