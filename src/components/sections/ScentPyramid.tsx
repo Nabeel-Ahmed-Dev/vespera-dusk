@@ -499,7 +499,7 @@ export function ScentPyramid() {
               >
                 <div data-pyramid-fade>
                   <Label className="text-cream/50">
-                    {tier.roman} · {tier.phase} — {tier.timing}
+                    {tier.phase} — {tier.timing}
                   </Label>
                 </div>
                 <h3
