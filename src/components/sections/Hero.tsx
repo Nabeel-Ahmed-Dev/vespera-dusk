@@ -390,20 +390,20 @@ export function Hero() {
       id="hero"
       dataSection="hero"
       aria-label="Hero"
-      className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,transparent_72%,#A9681F_100%),radial-gradient(ellipse_at_50%_40%,#F6DCA8_0%,#D9A355_58%,#A9681F_100%)] text-night"
+      className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,transparent_72%,#A9681F_100%),radial-gradient(ellipse_at_50%_40%,#F6DCA8_0%,#D9A355_58%,#A9681F_100%)] lg:bg-[linear-gradient(180deg,transparent_72%,#A9681F_100%),radial-gradient(ellipse_50%_47%_at_50%_53%,#F6DCA8_0%,#EED29E_28%,#DFB06A_56%,#C4893E_78%,#A9681F_100%)] text-night"
     >
       <div
         ref={rootRef}
         data-hero-entering=""
-        className="relative mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col px-6 pb-10 pt-[72px] sm:px-8 lg:h-[100dvh] lg:min-h-0 lg:px-16 lg:pb-4"
+        className="relative mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col px-6 pb-10 pt-[72px] sm:px-8 lg:h-[100dvh] lg:min-h-0 lg:px-12 lg:pb-[35px]"
       >
         {/* Desktop top metas */}
         <div
           ref={metasRef}
           className="js-hero-enter hidden items-start justify-between pt-4 lg:flex"
         >
-          <Label className="text-night/60">{site.hero.metaLeft}</Label>
-          <Label className="text-night/60">{site.hero.metaRight}</Label>
+          <Label className="text-night/60 lg:text-[11px] lg:leading-[13px]">{site.hero.metaLeft}</Label>
+          <Label className="text-night/60 lg:text-[11px] lg:leading-[13px]">{site.hero.metaRight}</Label>
         </div>
 
         {/* Mobile / tablet centered eyebrow */}
@@ -411,9 +411,9 @@ export function Hero() {
           {site.hero.eyebrow}
         </p>
 
-        {/* Layout shell: centered on the 100dvh hero, rotated with Tailwind. GSAP only fades the inner label. */}
-        <div className="pointer-events-none absolute top-1/2 left-8 hidden -translate-x-1/2 -translate-y-1/2 -rotate-90 lg:block">
-          <Label className="js-hero-enter js-hero-vertical block whitespace-nowrap text-night/50">
+        {/* Layout shell: centred 225.5px above the hero bottom (Figma 4:2), rotated with Tailwind. GSAP only fades the inner label. */}
+        <div className="pointer-events-none absolute bottom-[225.5px] left-[26.5px] hidden -translate-x-1/2 translate-y-1/2 -rotate-90 lg:block">
+          <Label className="js-hero-enter js-hero-vertical block whitespace-nowrap text-night/50 lg:text-[11px] lg:leading-[13px]">
             {site.hero.metaVertical}
           </Label>
         </div>
@@ -503,13 +503,13 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative z-20 mt-2 flex flex-col items-center gap-5 lg:mt-0 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-5">
-          <div className="max-w-xl text-center lg:text-left">
+        <div className="relative z-20 mt-2 flex flex-col items-center gap-5 lg:mt-0 lg:flex-row lg:items-start lg:justify-between lg:gap-5">
+          <div className="max-w-xl text-center lg:w-[380px] lg:max-w-none lg:text-left">
             <h1 className="overflow-hidden">
               <span
                 ref={taglineRef}
                 data-headline-line
-                className="js-hero-enter js-headline-line block font-display text-[1.75rem] leading-[1.1] font-normal italic sm:text-[clamp(1.75rem,3vw,2.6rem)] sm:leading-[1.12]"
+                className="js-hero-enter js-headline-line block font-display text-[1.75rem] leading-[1.1] font-normal italic sm:text-[clamp(1.75rem,3vw,2.6rem)] sm:leading-[1.12] lg:text-[34px] lg:leading-[37px]"
               >
                 {site.hero.tagline}
               </span>
@@ -517,31 +517,33 @@ export function Hero() {
             <p
               ref={descRef}
               data-headline-line
-              className="js-hero-enter js-headline-line mt-3 hidden max-w-md text-sm leading-relaxed text-night/70 lg:block"
+              className="js-hero-enter js-headline-line mt-3 hidden max-w-md text-sm leading-relaxed text-night/70 lg:mt-4 lg:block lg:max-w-none lg:text-[15px] lg:leading-6"
             >
               {site.hero.description}
             </p>
           </div>
 
-          <div className="flex w-full flex-col items-center gap-4 lg:items-end lg:gap-2.5">
-            <Button
-              href="#offer"
-              magnetic
-              className="js-hero-enter js-hero-cta order-1 h-14 w-full min-w-0 lg:order-2 lg:w-auto lg:min-w-[240px]"
-            >
-              {site.hero.cta}
-            </Button>
-            <Label className="js-hero-enter js-hero-stock order-2 flex items-center justify-center gap-2 text-[9px] text-night/85 lg:order-1 lg:text-[10px]">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber7" />
+          <div className="flex w-full flex-col items-center gap-4 lg:w-[380px] lg:items-start lg:gap-[18px]">
+            <div className="contents lg:order-2 lg:flex lg:items-center lg:gap-[14px]">
+              <Button
+                href="#offer"
+                magnetic
+                className="js-hero-enter js-hero-cta order-1 h-14 w-full min-w-0 lg:order-none lg:h-[49px] lg:w-[201px] lg:px-0"
+              >
+                {site.hero.cta}
+              </Button>
+              <a
+                ref={discoverRef}
+                href="#story"
+                className="js-hero-enter order-3 hidden min-h-11 items-center text-[13px] font-medium text-night/75 underline decoration-night/30 underline-offset-4 sm:inline-flex lg:order-none lg:h-[45px] lg:min-h-0 lg:pl-3 lg:decoration-night/60 lg:underline-offset-[9px]"
+              >
+                {site.hero.discover}
+              </a>
+            </div>
+            <Label className="js-hero-enter js-hero-stock order-2 flex items-center justify-center gap-2 text-[9px] text-night/85 lg:order-1 lg:gap-2.5 lg:text-[11px] lg:leading-[13px]">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber7 lg:h-2 lg:w-2" />
               {site.hero.stock}
             </Label>
-            <a
-              ref={discoverRef}
-              href="#story"
-              className="js-hero-enter order-3 hidden min-h-11 items-center text-[13px] font-medium text-night/75 underline decoration-night/30 underline-offset-4 sm:inline-flex"
-            >
-              {site.hero.discover}
-            </a>
             <p
               ref={perksRef}
               className="js-hero-enter order-4 hidden text-xs text-night/55 sm:block"
@@ -551,7 +553,7 @@ export function Hero() {
           </div>
         </div>
 
-        <Label className="js-hero-enter js-hero-scroll mt-6 hidden text-center text-night/45 sm:block lg:mt-2">
+        <Label className="js-hero-enter js-hero-scroll mt-6 hidden text-center text-night/45 sm:block lg:mt-8 lg:text-[11px] lg:leading-[13px]">
           {site.hero.scrollHint}
         </Label>
       </div>
