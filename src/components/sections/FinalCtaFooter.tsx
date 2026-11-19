@@ -64,6 +64,7 @@ export function FinalCtaFooter() {
               {site.finalCta.secondaryCta}
             </Button>
           </div>
+          <Label className="mt-8 text-cream/55">{site.finalCta.scarcity}</Label>
         </div>
       </div>
 
