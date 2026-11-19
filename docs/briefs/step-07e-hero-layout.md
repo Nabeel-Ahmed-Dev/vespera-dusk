@@ -12,7 +12,7 @@ Branch: `step-07e-hero-layout` (already checked out). Work ONLY on this branch. 
 - Edge inset 48px. Nav row: top 28, height 39. Logo 16px Montserrat (0.4em). Links start x=474, 13px, 40px apart. Bag -> Shop button gap 28. Shop button 200 x 39, 13px label, dot 6px #E0AE5C (honey4), 10px dot-to-text.
 - Hero: meta labels 11px. Promise block x=48, y=742, w=380: tagline Cormorant italic 34px / 37px line, description 15px / 24px, 16px below tagline.
 - Hero CTA block x=1012, y=742, w=380, left-aligned column, 18px gaps: scarcity (8px amber7 dot, 10px gap, 11px label) -> row [ADD TO BAG button 201 x 49] + 14px + [Discover link 45px tall, 12px left padding, underline night/60] -> perks.
-- Scroll cue 11px at y=912 (35px above hero bottom, 32px below the promise block). Side meta 11px, rotated, centred at x=26.5 and 225.5px above hero bottom.
+- Scroll cue 11px at y=912 (35px above hero bottom, 32px below the promise block). Side meta 11px, rotated, centred at x=26.5 and vertically centred on the hero (Nabeel kept it centred instead of the Figma 225.5px-above-bottom position).
 - Background: base #A9681F with a glow ellipse 50% x 47% centred at 50% 53% (stops #F6DCA8 0%, #EED29E 28%, #DFB06A 56%, #C4893E 78%, #A9681F 100%), so the sides darken to #A9681F.
 
 ## A. `src/components/sections/Nav.tsx`
@@ -42,8 +42,8 @@ B3. Desktop top metas: both `<Label className="text-night/60">` -> `<Label class
 
 B4. Side meta layout shell div:
 old: `pointer-events-none absolute top-1/2 left-8 hidden -translate-x-1/2 -translate-y-1/2 -rotate-90 lg:block`
-new: `pointer-events-none absolute bottom-[225.5px] left-[26.5px] hidden -translate-x-1/2 translate-y-1/2 -rotate-90 lg:block`
-Update the JSX comment above it to: `{/* Layout shell: centred 225.5px above the hero bottom (Figma 4:2), rotated with Tailwind. GSAP only fades the inner label. */}`
+new: `pointer-events-none absolute top-1/2 left-[26.5px] hidden -translate-x-1/2 -translate-y-1/2 -rotate-90 lg:block`
+Update the JSX comment above it to: `{/* Layout shell: vertically centred on the 100dvh hero (kept centred by Nabeel over Figma 4:2), rotated with Tailwind. GSAP only fades the inner label. */}`
 Its inner `<Label>`: `js-hero-enter js-hero-vertical block whitespace-nowrap text-night/50` -> `js-hero-enter js-hero-vertical block whitespace-nowrap text-night/50 lg:text-[11px] lg:leading-[13px]`
 
 B5. Bottom row container:

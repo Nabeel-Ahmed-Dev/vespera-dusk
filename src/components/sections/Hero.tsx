@@ -411,8 +411,8 @@ export function Hero() {
           {site.hero.eyebrow}
         </p>
 
-        {/* Layout shell: centred 225.5px above the hero bottom (Figma 4:2), rotated with Tailwind. GSAP only fades the inner label. */}
-        <div className="pointer-events-none absolute bottom-[225.5px] left-[26.5px] hidden -translate-x-1/2 translate-y-1/2 -rotate-90 lg:block">
+        {/* Layout shell: vertically centred on the 100dvh hero (kept centred by Nabeel over Figma 4:2), rotated with Tailwind. GSAP only fades the inner label. */}
+        <div className="pointer-events-none absolute top-1/2 left-[26.5px] hidden -translate-x-1/2 -translate-y-1/2 -rotate-90 lg:block">
           <Label className="js-hero-enter js-hero-vertical block whitespace-nowrap text-night/50 lg:text-[11px] lg:leading-[13px]">
             {site.hero.metaVertical}
           </Label>
