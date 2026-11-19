@@ -359,24 +359,24 @@ export function Story() {
     >
       <div
         ref={rootRef}
-        className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-32"
+        className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-8 sm:py-20 lg:px-12 lg:pt-[120px] lg:pb-[67px]"
       >
-        <div className="mb-8 flex items-start justify-between gap-8 sm:mb-10 lg:mb-14">
-          <Label className="text-cream/60">{site.story.label}</Label>
-          <Label className="hidden text-cream/50 lg:block">{site.story.aside}</Label>
+        <div className="mb-8 flex items-start justify-between gap-8 sm:mb-10 lg:mb-[37px]">
+          <Label className="text-cream/60 lg:text-[11px] lg:leading-[13px]">{site.story.label}</Label>
+          <Label className="hidden text-cream/50 lg:block lg:text-[11px] lg:leading-[13px]">{site.story.aside}</Label>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-x-20 lg:gap-y-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[680fr_592fr] lg:gap-x-[72px] lg:gap-y-[58px]">
           <h2
             ref={headlineRef}
-            className="order-1 max-w-3xl font-display text-[clamp(2.5rem,11vw,2.875rem)] leading-[1.02] font-light tracking-[-0.01em] lg:col-start-1 lg:row-start-1 lg:text-[clamp(2.5rem,5.5vw,5.5rem)]"
+            className="order-1 max-w-3xl font-display text-[clamp(2.5rem,11vw,2.875rem)] leading-[1.02] font-light tracking-[-0.01em] lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:max-w-none lg:text-[min(99px,6.875vw)] lg:leading-[1.05] lg:tracking-normal"
           >
             <span className="block overflow-hidden">
               <span data-headline-line className="js-headline-line block">
                 {site.story.headline}
               </span>
             </span>
-            <span className="block overflow-hidden">
+            <span className="block overflow-hidden lg:pl-[min(180px,12.5vw)]">
               <span
                 data-headline-line
                 className="js-headline-line block italic text-honey3"
@@ -391,17 +391,17 @@ export function Story() {
             </span>
           </h2>
 
-          <figure className="order-2 relative lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:mt-8">
+          <figure className="order-2 relative lg:col-start-2 lg:row-start-2 lg:self-start">
             <div
               ref={imageRef}
               data-story-image
-              className="js-story-image relative aspect-[4/5] overflow-hidden"
+              className="js-story-image relative aspect-[4/5] overflow-hidden lg:aspect-[592/640]"
             >
               <Image
                 src={site.images.darkAmber.src}
                 alt={site.images.darkAmber.alt || site.images.bottleTilt.alt}
                 fill
-                sizes="(max-width: 1023px) 100vw, 40vw"
+                sizes="(max-width: 1023px) 100vw, 592px"
                 quality={90}
                 loading="eager"
                 className="object-cover will-change-transform"
@@ -410,38 +410,38 @@ export function Story() {
             <div
               ref={badgeRef}
               data-edition-badge
-              className="js-edition-badge absolute right-4 bottom-4 flex h-24 w-24 flex-col items-center justify-center rounded-full bg-honey3 text-night will-change-transform"
+              className="js-edition-badge absolute right-4 bottom-4 flex h-24 w-24 flex-col items-center justify-center rounded-full bg-honey3 text-night will-change-transform lg:right-auto lg:bottom-[23px] lg:left-[-70px] lg:h-[140px] lg:w-[140px]"
             >
-              <span className="font-display text-2xl italic">
+              <span className="font-display text-2xl italic lg:text-[34px] lg:leading-[41px]">
                 {site.story.badgeEdition}
               </span>
-              <Label className="mt-0.5 text-[7px] text-night">
+              <Label className="mt-0.5 text-[7px] text-night lg:text-[8px] lg:leading-[10px]">
                 {site.story.badgeLabel}
               </Label>
             </div>
             <figcaption>
-              <Label className="mt-4 text-cream/45">{site.story.figCaption}</Label>
+              <Label className="mt-4 text-cream/45 lg:mt-5 lg:text-[11px] lg:leading-[13px]">{site.story.figCaption}</Label>
             </figcaption>
           </figure>
 
-          <div className="order-3 flex flex-col lg:col-start-1 lg:row-start-2">
+          <div className="order-3 flex flex-col lg:col-start-1 lg:row-start-2 lg:pt-[60px] lg:pb-[104px]">
             <p
               ref={bodyRef}
               data-headline-line
-              className="js-headline-line max-w-lg text-[15px] leading-relaxed text-cream/70 lg:ml-auto"
+              className="js-headline-line max-w-lg text-[15px] leading-relaxed text-cream/70 lg:ml-[26.47%] lg:max-w-[430px] lg:text-[18px] lg:leading-[29px]"
             >
               {site.story.body}
             </p>
             <p
               ref={attributionRef}
-              className="mt-6 max-w-lg font-display text-xl italic text-honey3 lg:ml-auto"
+              className="mt-6 max-w-lg font-display text-xl italic text-honey3 lg:mt-7 lg:mb-10 lg:ml-[26.47%] lg:max-w-[430px] lg:text-[22px] lg:leading-[27px]"
             >
               {site.story.attribution}
             </p>
 
             <div
               ref={statsRef}
-              className="mt-10 grid grid-cols-3 gap-3.5 border-t border-cream/15 pt-6 sm:gap-6 lg:mt-16 lg:pt-8"
+              className="mt-10 grid grid-cols-3 gap-3.5 border-t border-cream/15 pt-6 sm:gap-6 lg:mt-auto lg:grid-cols-[repeat(3,minmax(0,200px))] lg:gap-10 lg:border-t-0 lg:pt-0"
             >
               {site.story.stats.map((stat) => (
                 <div
@@ -452,11 +452,12 @@ export function Story() {
                   <div
                     data-stat-value
                     aria-label={stat.value}
-                    className="font-display text-[clamp(1.75rem,8vw,2.375rem)] leading-none text-honey3 lg:text-[clamp(2rem,3.5vw,3.25rem)]"
+                    className="font-display text-[clamp(1.75rem,8vw,2.375rem)] leading-none text-honey3 lg:text-[min(72px,5vw)]"
                   >
                     {stat.value}
                   </div>
-                  <p className="mt-2 text-[11px] leading-snug text-cream/55 lg:mt-3">
+                  <div aria-hidden className="hidden h-px w-full bg-cream/20 lg:mt-2 lg:block" />
+                  <p className="mt-2 text-[11px] leading-snug text-cream/55 lg:mt-2 lg:text-[13px] lg:leading-5">
                     {stat.label}
                   </p>
                 </div>
