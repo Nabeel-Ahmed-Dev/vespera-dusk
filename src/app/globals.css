@@ -97,6 +97,28 @@ html[data-sunset="live"] [data-section="hero"] {
   );
 }
 
+/*
+ * Desktop (Figma 4:2): the glow is a 50% x 47% ellipse centred at 50% 53%
+ * that reaches #A9681F at the sides. The seam layer is the same as above.
+ */
+@media (min-width: 64rem) {
+  html[data-sunset="live"] [data-section="hero"] {
+    background-image: linear-gradient(
+        180deg,
+        transparent 72%,
+        var(--sunset-bg, #e7c07f) 100%
+      ),
+      radial-gradient(
+        ellipse 50% 47% at 50% 53%,
+        #f6dca8 0%,
+        #eed29e 28%,
+        #dfb06a 56%,
+        #c4893e 78%,
+        #a9681f 100%
+      );
+  }
+}
+
 html[data-sunset="live"] [data-section="story"] {
   background-image: none;
   background-color: transparent;
